@@ -1,0 +1,41 @@
+[build]
+  publish = "site"
+  command = "echo 'Static site — no build step'"
+
+# Pretty URLs: /trump-accounts → trump-accounts.html
+[[redirects]]
+  from = "/trump-accounts"
+  to = "/trump-accounts.html"
+  status = 200
+
+[[redirects]]
+  from = "/parents"
+  to = "/parents.html"
+  status = 200
+
+[[redirects]]
+  from = "/business"
+  to = "/business.html"
+  status = 200
+
+[[redirects]]
+  from = "/game"
+  to = "/game.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

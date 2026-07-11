@@ -2,3 +2,6 @@
 **/.DS_Store
 _trash/
 *.zip
+
+# Local Netlify folder
+.netlify
