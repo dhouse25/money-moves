@@ -1616,6 +1616,7 @@ const MISSIONS_ADULT = [
   {id:'m5', em:'📈', title:'Buy your first S&P 500 index fund', xp:1000, coins:200, desc:'Own ~500 companies in one move. Then hold.', badge:'bIndex'},
   {id:'m6', em:'📱', title:'Start a free money tracker',   xp:300, coins:50, desc:'CFO Silvia or Rocket Money — both free.', badge:'bTrack'},
   {id:'m7', em:'🛡️', title:'Name beneficiaries + term-life quote', xp:500, coins:80, desc:'Protect the people you love (~$1/day for young, healthy adults).', badge:'bShield'},
+  {id:'m8', em:'👶', title:'Trump Account plan (kids / future kids)', xp:800, coins:150, desc:'Read the Money Move$ guide: $5k room, $2.5k employer, Roth conversion at 18. Open one if eligible or ask HR.', badge:'bTrumpAcct'},
 ];
 const MISSIONS_MIDDLE = [
   {id:'ms1', em:'🫙', title:'Start a Save jar (or app folder)', xp:300, coins:50, desc:'Label a jar / envelope / savings pocket: Save. Put any amount in.', badge:'bPiggy'},
@@ -1625,6 +1626,7 @@ const MISSIONS_MIDDLE = [
   {id:'ms5', em:'🛡️', title:'Password + scam checklist', xp:400, coins:60, desc:'Turn on a strong password / passcode. Promise: never share logins for “free” game stuff.', badge:'bAntiScam'},
   {id:'ms6', em:'📚', title:'Get something free instead of buying', xp:300, coins:50, desc:'Library, trade with a friend, or borrow — enjoy it without spending.', badge:'bFreeFun'},
   {id:'ms7', em:'🧹', title:'Earn your own $5+', xp:500, coins:80, desc:'Chores, help a neighbor, sell something you don’t use — real earned money.', badge:'bEarn'},
+  {id:'ms8', em:'👶', title:'Ask about a Trump Account', xp:400, coins:60, desc:'Ask a parent/guardian: “Do I have a Trump Account?” Learn the $1,000 seed + long-term investing idea together.', badge:'bTrumpAcct'},
 ];
 const MISSIONS_HIGH = [
   {id:'h1', em:'🤖', title:'Map a teen budget with Claude', xp:300, coins:50, desc:'List allowance/job pay + where it goes. Needs / wants / save.', badge:'bClaude'},
@@ -1634,6 +1636,7 @@ const MISSIONS_HIGH = [
   {id:'h5', em:'🌱', title:'Learn Roth + ask about a custodial IRA', xp:800, coins:150, desc:'If you have earned income: ask a parent about a custodial Roth. If not: write 3 facts about Roth IRAs.', badge:'bRothLearn'},
   {id:'h6', em:'📱', title:'Track money for 2 weeks', xp:300, coins:50, desc:'Notes app, spreadsheet, or free tracker — catch subscription & snack leaks.', badge:'bTrack'},
   {id:'h7', em:'🚫', title:'Dodge one money trap', xp:400, coins:60, desc:'Skip a BNPL / payday-loan ad / “double your money” pitch. Screenshot the red flag for yourself.', badge:'bAntiScam'},
+  {id:'h8', em:'👶', title:'Trump Account + Roth plan (talk + learn)', xp:700, coins:120, desc:'Learn: $5k/yr room, $2.5k employer, at 18 → IRA → Roth conversion. Ask a parent if you have one; write the 3-step plan.', badge:'bTrumpAcct'},
 ];
 const MISSIONS = MISSIONS_ADULT; // default / fallback
 function climbMissions(){
@@ -1673,6 +1676,7 @@ const BADGES = [
   {id:'bEarn',    em:'🧹', name:'First real earn'},
   {id:'bYouthBank',em:'🏦', name:'Youth account open'},
   {id:'bRothLearn',em:'🌱', name:'Roth-ready'},
+  {id:'bTrumpAcct',em:'👶', name:'Trump Account plan'},
   {id:'bLife',    em:'🌍', name:'Survived a Life Run'},
   {id:'bMillion', em:'💰', name:'Millionaire'},
   {id:'bFree',    em:'🏝️', name:'Financially Free'},
@@ -1811,6 +1815,11 @@ const MYTHS = [
   {q:'Carrying a credit-card balance “builds” credit faster.', fact:false, why:'Myth — you just pay interest. Pay in full.'},
   {q:'Compound growth means your earnings start earning too.', fact:true, why:'True — that snowball is the whole game.'},
   {q:'Babies born in 2025 may qualify for a $1,000 seeded account.', fact:true, why:'True — the new “Trump Accounts” seed eligible newborns $1,000.'},
+  {q:'Trump Accounts allow up to $5,000 total contributions per year per child.', fact:true, why:'True — family, friends, and employers share that $5,000 room.'},
+  {q:'An employer can put up to $2,500/year into a Trump Account tax-free to the worker.', fact:true, why:'True — and that $2,500 counts inside the $5,000 annual cap.'},
+  {q:'Parent gifts into a Trump Account are always a $5,000 tax deduction.', fact:false, why:'Myth — family contributions usually aren’t deductible. Employer money is the special tax-free piece.'},
+  {q:'After 18, a Trump Account generally follows traditional IRA rules — Roth conversion possible.', fact:true, why:'True — convert in low-income years so later growth can be tax-free.'},
+  {q:'You can always pull Trump Account / IRA money for a startup with zero tax or penalty.', fact:false, why:'Myth — early withdrawals usually mean tax + 10% penalty. Bootstrap first; leave the pile compounding.'},
   {q:'Time IN the market beats timing the market.', fact:true, why:'True — staying invested wins over guessing the dips.'},
   {q:'A 401(k) is the only way to invest for retirement.', fact:false, why:'Myth — no 401k? A Roth IRA or brokerage works great.'},
   {q:'Skipping an emergency fund and investing it all is the safe move.', fact:false, why:'Myth — without a cushion, one surprise forces you to sell.'},
@@ -1913,6 +1922,9 @@ const MYTH_DECKS={
   {q:'Tracking subscriptions stops silent monthly money leaks.',fact:true,why:'True — $9.99s hide everywhere. Audit them twice a year.'},
   {q:'Making your own $5 daily drink frees up ~$150/mo to invest.',fact:true,why:'True — it’s not about the drink, it’s about noticing the leak and redirecting it.'},
   {q:'You’re too young for any of this to matter yet.',fact:false,why:'Myth — you have the ONE thing billionaires can’t buy: decades of compounding ahead.'},
+  {q:'A Trump Account can get up to $5,000/year total — employers up to $2,500 of that.',fact:true,why:'True — the $2,500 employer piece usually isn’t taxed as your parent’s wages.'},
+  {q:'At 18, Trump Account money is free to spend with zero tax or rules.',fact:false,why:'Myth — it becomes IRA-like. Taxes and early-withdrawal rules still apply. Roth conversion is the power move.'},
+  {q:'Starting a business with Trump Account cash is always tax- and penalty-free.',fact:false,why:'Myth — no founders free pass. Bootstrap first; leave the pile compounding when you can.'},
  ],
  college:[
   {q:'Paying only the minimum on a credit card costs a lot in interest.',fact:true,why:'True — minimums stretch a small balance into years of interest.'},
@@ -1928,6 +1940,8 @@ const MYTH_DECKS={
   {q:'Small daily spends add up and could be invested instead.',fact:true,why:'True — it’s about the habit and opportunity cost, not guilt over coffee.'},
   {q:'You should understand a loan’s interest rate before you sign.',fact:true,why:'True — the rate decides what it really costs. Always ask.'},
   {q:'Starting a Roth IRA in your 20s gives compounding decades to work.',fact:true,why:'True — the earlier dollars are the most powerful ones you’ll ever invest.'},
+  {q:'After 18, converting a former Trump Account to a Roth can lock in tax-free growth.',fact:true,why:'True — pay tax while your rate is low, then decades of growth can be tax-free.'},
+  {q:'Trump Account employer contributions (up to $2,500) count toward the $5,000 yearly cap.',fact:true,why:'True — it’s one shared room, not $5k plus another $2.5k.'},
   {q:'A budget that’s 50% needs, 30% wants, 20% saving is a solid starting rule.',fact:true,why:'True — the 50/30/20 split is a simple, flexible framework.'},
   {q:'Skipping health insurance to save money is a safe bet when you’re young.',fact:false,why:'Myth — one ER visit can mean tens of thousands in debt. Stay covered.'},
   {q:'Co-signing a loan means you owe nothing if the other person stops paying.',fact:false,why:'Myth — co-signing makes YOU fully on the hook. Be very careful.'},

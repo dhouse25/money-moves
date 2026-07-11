@@ -1,9 +1,9 @@
 /* Money Move$ service worker — offline support without trapping stale content.
    Bump CACHE when you deploy and want clients to refresh the precache. */
-const CACHE = 'mm-v6';
+const CACHE = 'mm-v7';
 const CORE = [
   '/', '/index.html', '/game.html', '/business.html',
-  '/parents.html', '/privacy.html', '/terms.html',
+  '/parents.html', '/trump-accounts.html', '/privacy.html', '/terms.html',
   '/js/analytics.js',
   '/manifest.webmanifest',
   '/icons/icon-192.png', '/icons/icon-512.png', '/icons/apple-touch-icon.png',
