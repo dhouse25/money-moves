@@ -85,6 +85,68 @@
   .closer h2{font-family:'Archivo Black';font-size:clamp(22px,5vw,32px);margin-bottom:10px}
   .closer p{color:var(--muted);max-width:460px;margin:0 auto 18px}
 
+  /* Trump Accounts — parent priority glow */
+  @keyframes mmGlowPulse{
+    0%,100%{
+      box-shadow:0 0 0 1px rgba(255,210,63,.55),0 0 22px rgba(255,210,63,.3),0 0 52px rgba(255,210,63,.15);
+      border-color:rgba(255,210,63,.7);
+    }
+    50%{
+      box-shadow:0 0 0 2px rgba(255,210,63,1),0 0 40px rgba(255,210,63,.55),0 0 80px rgba(255,210,63,.28),0 0 100px rgba(198,255,61,.1);
+      border-color:rgba(255,210,63,1);
+    }
+  }
+  @keyframes mmBadgePulse{
+    0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,210,63,.45)}
+    50%{transform:scale(1.04);box-shadow:0 0 16px 2px rgba(255,210,63,.55)}
+  }
+  @keyframes mmShimmer{
+    0%{background-position:0% 50%}
+    100%{background-position:200% 50%}
+  }
+  .trump-glow{
+    position:relative;
+    margin:8px 0 28px;
+    border:1.5px solid rgba(255,210,63,.75) !important;
+    border-radius:18px;
+    padding:22px 20px !important;
+    background:
+      linear-gradient(160deg,rgba(255,210,63,.2),rgba(177,140,255,.08) 60%,rgba(198,255,61,.06)) !important;
+    animation:mmGlowPulse 2.5s ease-in-out infinite;
+    overflow:hidden;
+  }
+  .trump-glow::after{
+    content:"";
+    position:absolute;inset:-40% -20%;
+    background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.08) 48%,transparent 62%);
+    background-size:200% 100%;
+    animation:mmShimmer 3.6s linear infinite;
+    pointer-events:none;
+  }
+  .trump-glow > *{position:relative;z-index:1}
+  .trump-glow .priority-pill{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;
+    color:var(--ink);background:var(--yellow);
+    padding:6px 12px;border-radius:999px;margin-bottom:10px;
+    animation:mmBadgePulse 2s ease-in-out infinite;
+  }
+  .trump-glow h3{color:var(--yellow) !important;font-size:clamp(18px,4.5vw,22px) !important}
+  .btn-glow{
+    background:var(--yellow) !important;color:var(--ink) !important;
+    box-shadow:0 0 22px rgba(255,210,63,.45);
+    border:none !important;
+  }
+  .btn-glow:hover{box-shadow:0 0 32px rgba(255,210,63,.65)}
+  .btn-trump-nav{
+    border-color:rgba(255,210,63,.7) !important;color:var(--ink) !important;
+    background:var(--yellow) !important;
+    animation:mmBadgePulse 2.2s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion:reduce){
+    .trump-glow,.trump-glow::after,.trump-glow .priority-pill,.btn-trump-nav{animation:none !important}
+  }
+
   footer{text-align:center;color:var(--muted);font-size:12.5px;padding:28px 0 48px;line-height:1.7}
   footer a{color:var(--cyan)}
 </style>
@@ -101,26 +163,20 @@
     <h1 class="display">A money game your teen will <span class="hl">actually</span> open.</h1>
     <p class="sub">Money Move$ turns real financial literacy into levels, streaks, and ranks — free, phone-friendly, and built without the dark patterns that make parents nervous.</p>
     <div class="cta-row">
+      <a class="btn btn-trump-nav" href="/trump-accounts">⭐ Trump Accounts first</a>
       <a class="btn btn-lime" href="/game" id="playBtn">Let them play free →</a>
-      <a class="btn btn-ghost" href="/trump-accounts" style="border-color:rgba(255,210,63,.5);color:var(--yellow)">Trump Accounts guide</a>
       <button type="button" class="btn btn-share" id="shareParents">📣 Share with another parent</button>
       <a class="btn btn-ghost" href="/">See the full site</a>
     </div>
     <p class="note">First win in about 2 minutes · No account required · Works on phone &amp; laptop</p>
   </section>
 
-  <div class="grid">
-    <div class="card"><div class="em">🛡️</div><h3>Safe by design</h3><p>No credit card. No loot boxes. No stranger chat. No selling kids’ data. Progress stays on their device.</p></div>
-    <div class="card"><div class="em">🧠</div><h3>Real skills</h3><p>Budgeting, debt, credit unions, index funds, Roth IRAs, term life — the same “six moves” adults need, in teen language.</p></div>
-    <div class="card"><div class="em">🎮</div><h3>They’ll keep playing</h3><p>Ranks, missions, daily streaks, and a shareable “flex card” after wins. Learning is the side effect.</p></div>
-    <div class="card"><div class="em">🤝</div><h3>Honor-system missions</h3><p>Biggest rewards for real-world moves (save $25, open a Roth). Nothing is tracked externally — it’s between them and their future self.</p></div>
-  </div>
-
-  <!-- Trump Accounts parent block -->
-  <div class="card" style="margin:28px 0 8px;border-color:rgba(255,210,63,.4);background:linear-gradient(160deg,rgba(255,210,63,.12),transparent)">
+  <!-- Trump Accounts — highest priority for parents (glowing) -->
+  <div class="card trump-glow" id="trump-accounts">
+    <div class="priority-pill">⭐ #1 priority for parents</div>
     <div class="em">👶</div>
-    <h3 style="color:var(--yellow)">New: Trump Accounts for kids</h3>
-    <p style="margin-bottom:10px">Federal kids’ investment accounts — not a gimmick. Here’s the parent-sized version:</p>
+    <h3>Trump Accounts for kids — do this first</h3>
+    <p style="margin-bottom:10px;color:var(--muted)">Federal kids’ investment accounts — not a gimmick. The single highest-leverage money move for many families right now:</p>
     <ul style="color:var(--muted);font-size:13.5px;margin:0 0 12px 18px;line-height:1.55">
       <li style="margin-bottom:6px"><b style="color:var(--text)">$5,000/year total</b> room (family + employers + others combined)</li>
       <li style="margin-bottom:6px"><b style="color:var(--text)">Employer up to $2,500</b> of that — usually <b style="color:var(--text)">tax-free to you</b> as wages (ask HR)</li>
@@ -129,9 +185,16 @@
       <li><b style="color:var(--text)">Your gifts are usually not deductible</b> — the win is tax-deferred growth + the Roth plan</li>
     </ul>
     <div style="display:flex;flex-wrap:wrap;gap:10px">
-      <a class="btn btn-lime" href="/trump-accounts#parents" style="font-size:13.5px;padding:11px 16px">Parent checklist + compound math →</a>
-      <a class="btn btn-ghost" href="https://trumpaccounts.gov" target="_blank" rel="noopener" style="font-size:13.5px;padding:11px 16px;border-color:var(--yellow);color:var(--yellow)">Claim at trumpaccounts.gov</a>
+      <a class="btn btn-glow" href="/trump-accounts#parents" style="font-size:13.5px;padding:12px 18px">Parent checklist + compound math →</a>
+      <a class="btn btn-ghost" href="https://trumpaccounts.gov" target="_blank" rel="noopener" style="font-size:13.5px;padding:12px 18px;border-color:var(--yellow);color:var(--yellow)">Claim at trumpaccounts.gov</a>
     </div>
+  </div>
+
+  <div class="grid">
+    <div class="card"><div class="em">🛡️</div><h3>Safe by design</h3><p>No credit card. No loot boxes. No stranger chat. No selling kids’ data. Progress stays on their device.</p></div>
+    <div class="card"><div class="em">🧠</div><h3>Real skills</h3><p>Budgeting, debt, credit unions, index funds, Roth IRAs, term life — the same “six moves” adults need, in teen language.</p></div>
+    <div class="card"><div class="em">🎮</div><h3>They’ll keep playing</h3><p>Ranks, missions, daily streaks, and a shareable “flex card” after wins. Learning is the side effect.</p></div>
+    <div class="card"><div class="em">🤝</div><h3>Honor-system missions</h3><p>Biggest rewards for real-world moves (save $25, open a Roth). Nothing is tracked externally — it’s between them and their future self.</p></div>
   </div>
 
   <h2 class="sec-h">Why this exists</h2>

@@ -1,6 +1,6 @@
 /* Money Move$ service worker — offline support without trapping stale content.
    Bump CACHE when you deploy and want clients to refresh the precache. */
-const CACHE = 'mm-v7';
+const CACHE = 'mm-v8';
 const CORE = [
   '/', '/index.html', '/game.html', '/business.html',
   '/parents.html', '/trump-accounts.html', '/privacy.html', '/terms.html',

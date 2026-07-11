@@ -101,6 +101,16 @@
   footer{text-align:center;color:var(--muted);font-size:12px;padding:34px 0 46px;line-height:1.7}
   footer a{color:var(--cyan)}
   .free{display:inline-block;color:var(--lime);font-weight:700;font-size:13px;margin-top:6px}
+
+  @keyframes mmGlowPulse{
+    0%,100%{box-shadow:0 0 0 1px rgba(255,210,63,.5),0 0 20px rgba(255,210,63,.28),0 0 44px rgba(255,210,63,.12)}
+    50%{box-shadow:0 0 0 2px rgba(255,210,63,.95),0 0 36px rgba(255,210,63,.5),0 0 72px rgba(255,210,63,.25)}
+  }
+  .feat.trump-glow{
+    animation:mmGlowPulse 2.6s ease-in-out infinite;
+    border-color:rgba(255,210,63,.7) !important;
+  }
+  @media (prefers-reduced-motion:reduce){.feat.trump-glow{animation:none !important}}
 </style>
 </head>
 <body>
@@ -194,13 +204,13 @@
     </div>
   </div>
 
-  <div class="feat" style="border-color:rgba(255,210,63,.45);background:linear-gradient(160deg,rgba(255,210,63,.12),rgba(255,159,67,.04));margin:18px 0 8px">
+  <div class="feat trump-glow" style="border-color:rgba(255,210,63,.45);background:linear-gradient(160deg,rgba(255,210,63,.12),rgba(255,159,67,.04));margin:18px 0 8px">
     <div class="fem">👶</div>
     <div class="ft">Trump Accounts ≠ free startup cash</div>
     <div class="fd">If you have a <b style="color:var(--text)">Trump Account</b>, it’s locked until ~18, then it becomes IRA-like money. Pulling it early for a business usually means <b style="color:var(--text)">income tax + often a 10% penalty</b> — there is no special “founders exemption.” Smart path: <b style="color:var(--text)">bootstrap the hustle</b>, convert the account to a <b style="color:var(--text)">Roth</b> while your tax rate is low, and let it compound (full funding can illustrate multi‑millions by 65). Only raid it if you’ve proven demand and still need a small, deliberate amount. <a href="/trump-accounts#paths" style="color:var(--yellow);font-weight:700">Full strategy →</a></div>
   </div>
 
-  <div class="feat" style="border-color:rgba(61,212,255,.4);background:linear-gradient(160deg,rgba(61,212,255,.1),transparent);margin:12px 0 8px">
+  <div class="feat trump-glow" style="border-color:rgba(255,210,63,.5);background:linear-gradient(160deg,rgba(255,210,63,.12),rgba(61,212,255,.06));margin:12px 0 8px">
     <div class="fem">🏢</div>
     <div class="ft">Employers / parents reading this</div>
     <div class="fd">Employers can contribute up to <b style="color:var(--text)">$2,500/year per employee</b> into a kid’s Trump Account (counts inside the <b style="color:var(--text)">$5,000</b> annual room, usually tax-free to the worker). Pair the benefit with financial literacy so teens don’t treat it like a spending account. <a href="/trump-accounts#employers" style="color:var(--cyan);font-weight:700">Employer playbook →</a></div>
