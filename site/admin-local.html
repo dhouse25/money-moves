@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local admin · Money Move$</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml">
+<style>
+  body{font-family:system-ui,sans-serif;background:#0d0f14;color:#f4f6fb;padding:24px;line-height:1.5;max-width:720px;margin:0 auto}
+  h1{font-size:22px;margin:0 0 8px}
+  p{color:#a3acc0;font-size:14px}
+  button,a.btn{display:inline-block;background:#c6ff3d;color:#0d0f14;border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;margin:6px 6px 6px 0;text-decoration:none;font-size:13px}
+  pre{background:#191d27;border:1px solid #2c3342;border-radius:12px;padding:14px;overflow:auto;font-size:12px;max-height:360px}
+  .warn{background:rgba(255,94,91,.12);border:1px solid rgba(255,94,91,.35);border-radius:12px;padding:12px;font-size:13px;margin:16px 0;color:#f4f6fb}
+</style>
+</head>
+<body>
+  <h1>Local founder tools</h1>
+  <p>Not public-facing. Export waitlist emails and analytics stored in <b>this browser</b> only.</p>
+  <div class="warn">When you add Formspree/Resend, set <code>window.MM_WAITLIST_ENDPOINT</code> and <code>window.MM_ANALYTICS_ENDPOINT</code> on the live site. Until then, hit Export after testing on your device.</div>
+  <button type="button" id="expWait">Export waitlist CSV</button>
+  <button type="button" id="expEv">Export events CSV</button>
+  <button type="button" id="sum">Show event summary</button>
+  <a class="btn" href="/">← Site</a>
+  <pre id="out">Ready.</pre>
+<script src="/js/analytics.js"></script>
+<script>
+function dl(name,text){
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([text],{type:'text/csv'}));
+  a.download=name;a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+}
+document.getElementById('expWait').onclick=function(){
+  var list=[];
+  try{list=JSON.parse(localStorage.getItem('mm_waitlist_all')||'[]');}catch(e){}
+  var rows=['email,ts,source,audience'];
+  list.forEach(function(e){rows.push([e.email,e.ts,e.source||'',e.audience||''].join(','));});
+  dl('mm-waitlist.csv',rows.join('\n'));
+  document.getElementById('out').textContent='Exported '+list.length+' waitlist emails.';
+};
+document.getElementById('expEv').onclick=function(){
+  var csv=(window.MM&&MM.analytics&&MM.analytics.exportCSV)?MM.analytics.exportCSV():'';
+  dl('mm-events.csv',csv);
+  document.getElementById('out').textContent='Events CSV downloaded.';
+};
+document.getElementById('sum').onclick=function(){
+  var s=(window.MM&&MM.analytics&&MM.analytics.summary)?MM.analytics.summary():{};
+  document.getElementById('out').textContent=JSON.stringify(s,null,2);
+};
+</script>
+</body>
+</html>

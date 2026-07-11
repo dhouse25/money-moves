@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Parents · Money Move$</title>
+<meta name="theme-color" content="#0d0f14">
+<meta name="description" content="They get the card. We build the brain behind it. Free financial literacy game parents can trust — no loot boxes, no credit card, real skills.">
+<meta property="og:title" content="For Parents · Money Move$">
+<meta property="og:description" content="A free money game for teens that parents can actually trust. Real skills. No shady monetization.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}</script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d0f14;--ink-2:#14171f;--card:#191d27;--line:#2c3342;
+    --text:#f4f6fb;--muted:#a3acc0;--lime:#c6ff3d;--cyan:#3dd4ff;--violet:#b18cff;--yellow:#ffd23f;--coral:#ff5e5b;
+    --radius:20px;--shadow:0 18px 40px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Space Grotesk',system-ui,sans-serif;background:var(--ink);color:var(--text);line-height:1.5;
+    background-image:
+      radial-gradient(800px 420px at 10% -5%, rgba(61,212,255,.12), transparent 60%),
+      radial-gradient(700px 480px at 100% 0%, rgba(198,255,61,.08), transparent 55%);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  a{color:inherit;text-decoration:none}
+  .display{font-family:'Archivo Black',Impact,sans-serif;letter-spacing:-.4px;line-height:1.05}
+  .top{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+  .brand{font-family:'Archivo Black';font-size:18px;display:flex;align-items:center;gap:10px}
+  .brand span{color:var(--lime)}
+  .pill{font-size:11px;font-weight:700;color:var(--cyan);border:1px solid rgba(61,212,255,.4);
+    background:rgba(61,212,255,.1);border-radius:999px;padding:6px 12px}
+  .hero{padding:28px 0 10px;text-align:center}
+  .kick{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan);font-weight:700}
+  h1{font-size:clamp(32px,8vw,48px);margin:12px 0 14px}
+  h1 .hl{color:var(--lime)}
+  .sub{color:var(--muted);font-size:clamp(15px,3.5vw,18px);max-width:540px;margin:0 auto}
+  .sub b{color:var(--text)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:26px 0 8px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;
+    padding:14px 22px;border-radius:14px;border:none;cursor:pointer;
+  }
+  .btn-lime{background:var(--lime);color:var(--ink);box-shadow:0 12px 26px rgba(198,255,61,.28)}
+  .btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
+  .btn-share{background:var(--violet);color:var(--ink)}
+  .note{font-size:12.5px;color:var(--muted);margin-top:10px}
+
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:36px 0 10px}
+  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+  .card .em{font-size:28px}
+  .card h3{font-family:'Archivo Black';font-size:16px;margin:8px 0 6px}
+  .card p{color:var(--muted);font-size:13.5px}
+
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0 32px}
+  @media(max-width:560px){.compare{grid-template-columns:1fr}}
+  .path{border:1px solid var(--line);border-radius:16px;padding:18px;background:var(--card)}
+  .path.good{border-color:rgba(198,255,61,.45);background:linear-gradient(160deg,rgba(198,255,61,.12),transparent)}
+  .path .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:10px}
+  .path.bad .lbl{color:var(--coral)} .path.good .lbl{color:var(--lime)}
+  .path li{list-style:none;font-size:14px;color:var(--muted);margin-bottom:8px;padding-left:0}
+  .path li b{color:var(--text)}
+
+  .sec-h{font-family:'Archivo Black';font-size:clamp(22px,5vw,30px);text-align:center;margin:40px 0 8px}
+  .sec-s{text-align:center;color:var(--muted);font-size:15px;max-width:520px;margin:0 auto 20px}
+
+  .faq{display:flex;flex-direction:column;gap:10px;margin-bottom:36px}
+  .faq details{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .faq summary{font-weight:700;cursor:pointer;list-style:none}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq details p{color:var(--muted);font-size:14px;margin-top:10px}
+
+  .closer{
+    text-align:center;background:linear-gradient(160deg,rgba(61,212,255,.12),rgba(198,255,61,.08));
+    border:1px solid rgba(61,212,255,.35);border-radius:22px;padding:36px 20px;margin:20px 0 10px;
+  }
+  .closer h2{font-family:'Archivo Black';font-size:clamp(22px,5vw,32px);margin-bottom:10px}
+  .closer p{color:var(--muted);max-width:460px;margin:0 auto 18px}
+
+  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:28px 0 48px;line-height:1.7}
+  footer a{color:var(--cyan)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="/">Money Move<span>$</span></a>
+    <span class="pill">For parents</span>
+  </div>
+
+  <section class="hero">
+    <div class="kick">They get the card. We build the brain.</div>
+    <h1 class="display">A money game your teen will <span class="hl">actually</span> open.</h1>
+    <p class="sub">Money Move$ turns real financial literacy into levels, streaks, and ranks — free, phone-friendly, and built without the dark patterns that make parents nervous.</p>
+    <div class="cta-row">
+      <a class="btn btn-lime" href="/game" id="playBtn">Let them play free →</a>
+      <button type="button" class="btn btn-share" id="shareParents">📣 Share with another parent</button>
+      <a class="btn btn-ghost" href="/">See the full site</a>
+    </div>
+    <p class="note">First win in about 2 minutes · No account required · Works on phone &amp; laptop</p>
+  </section>
+
+  <div class="grid">
+    <div class="card"><div class="em">🛡️</div><h3>Safe by design</h3><p>No credit card. No loot boxes. No stranger chat. No selling kids’ data. Progress stays on their device.</p></div>
+    <div class="card"><div class="em">🧠</div><h3>Real skills</h3><p>Budgeting, debt, credit unions, index funds, Roth IRAs, term life — the same “six moves” adults need, in teen language.</p></div>
+    <div class="card"><div class="em">🎮</div><h3>They’ll keep playing</h3><p>Ranks, missions, daily streaks, and a shareable “flex card” after wins. Learning is the side effect.</p></div>
+    <div class="card"><div class="em">🤝</div><h3>Honor-system missions</h3><p>Biggest rewards for real-world moves (save $25, open a Roth). Nothing is tracked externally — it’s between them and their future self.</p></div>
+  </div>
+
+  <h2 class="sec-h">Why this exists</h2>
+  <p class="sec-s">Greenlight and debit cards teach spending. Almost nobody teaches the brain behind the card — until debt or FOMO does it the hard way.</p>
+  <div class="compare">
+    <div class="path bad">
+      <div class="lbl">Default path</div>
+      <ul>
+        <li>School barely covers money</li>
+        <li>TikTok “finance gurus”</li>
+        <li>First credit card at 18</li>
+        <li><b>Panic at 28</b></li>
+      </ul>
+    </div>
+    <div class="path good">
+      <div class="lbl">Money Move$ path</div>
+      <ul>
+        <li>Play 10 minutes a day</li>
+        <li>Practice needs vs wants</li>
+        <li>Open a Roth while young</li>
+        <li><b>Compounding head start</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="sec-h">Questions parents ask</h2>
+  <div class="faq">
+    <details open>
+      <summary>Is it free?</summary>
+      <p>Yes. The core game and lessons are free forever. If we ever add a parent Family plan, it will be optional, clearly labeled, and never required to learn the basics.</p>
+    </details>
+    <details>
+      <summary>Is it appropriate for middle school?</summary>
+      <p>Yes. Players pick Middle School, High School, College, or Young Adult so examples match their life (allowance vs rent). You can sit with them on level 1 — it takes about a minute.</p>
+    </details>
+    <details>
+      <summary>Will it push crypto, day trading, or gambling?</summary>
+      <p>No. We actively teach <b>traps to dodge</b> — get-rich-quick schemes, whole life as an “investment,” and commission-driven products. The core move is boring on purpose: low-cost index funds + time.</p>
+    </details>
+    <details>
+      <summary>Do you collect my kid’s data?</summary>
+      <p>Progress is stored on the device. Optional email is only if someone joins the waitlist. Read the full <a href="/privacy" style="color:var(--cyan)">Privacy</a> page.</p>
+    </details>
+    <details>
+      <summary>How do I get them to start?</summary>
+      <p>Text them the game link and race them on level 1. Or open it together on the couch. First win unlocks the climb — that’s the hook.</p>
+    </details>
+  </div>
+
+  <section class="closer">
+    <h2 class="display">Send them up the climb.</h2>
+    <p>Two minutes to first win. Years of better money habits. Share this page with a co-parent, auntie, coach, or youth pastor.</p>
+    <div class="cta-row">
+      <a class="btn btn-lime" href="/game">Open the game →</a>
+      <button type="button" class="btn btn-share" id="shareParents2">📣 Share this page</button>
+    </div>
+  </section>
+
+  <footer>
+    Independent financial education · not advice · <a href="/privacy">Privacy</a> · <a href="/terms">Terms</a><br>
+    Prefer the teen-facing page? <a href="/">Money Move$ home →</a>
+  </footer>
+</div>
+<script src="/js/analytics.js"></script>
+<script>
+(function(){
+  function share(){
+    var url = location.origin + '/parents';
+    var text = 'Found a free money game for teens that actually teaches real skills (no loot boxes). Money Move$ — they play, they learn. ' + url;
+    if (window.MM && MM.track) MM.track('parent_share', {});
+    if (navigator.share) {
+      navigator.share({ title: 'Money Move$ for parents', text: text, url: url }).catch(function(){});
+      return;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function(){ alert('Link copied — paste it in a text or group chat.'); });
+    } else {
+      prompt('Copy this link:', url);
+    }
+  }
+  var a = document.getElementById('shareParents');
+  var b = document.getElementById('shareParents2');
+  if (a) a.onclick = share;
+  if (b) b.onclick = share;
+  var play = document.getElementById('playBtn');
+  if (play) play.addEventListener('click', function(){ if (window.MM && MM.track) MM.track('parent_play_click', {}); });
+})();
+</script>
+</body>
+</html>

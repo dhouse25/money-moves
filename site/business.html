@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Move$ · The Hustle — Build Your Own Thing</title>
+<meta name="theme-color" content="#0d0f14">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Money Move$">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}</script>
+<meta name="description" content="You don't have to wait for a degree and a job. Learn to start and run a real business — at your age — through a free game.">
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/favicon-32.png" type="image/png" sizes="32x32">
+<script src="/js/analytics.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d0f14; --ink-2:#161922; --card:#191d28; --line:#262b38;
+    --text:#eef1f6; --muted:#9aa3b6;
+    --lime:#c6ff3d; --cyan:#3dd4ff; --violet:#b18cff; --yellow:#ffd23f; --coral:#ff5e5b; --green:#37e6a4;
+    --orange:#ff9f43;
+    --shadow:0 14px 40px rgba(0,0,0,.45);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--ink);color:var(--text);font-family:'Space Grotesk',system-ui,sans-serif;
+    line-height:1.5;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  a{color:inherit;text-decoration:none}
+  .display{font-family:'Archivo Black',sans-serif;letter-spacing:-.5px}
+
+  /* glow background */
+  body::before{content:'';position:fixed;inset:0;z-index:-1;
+    background:
+      radial-gradient(680px 420px at 80% -5%, rgba(255,159,67,.16), transparent 70%),
+      radial-gradient(620px 420px at 0% 8%, rgba(61,212,255,.12), transparent 70%),
+      radial-gradient(700px 500px at 50% 110%, rgba(177,140,255,.12), transparent 70%);}
+
+  /* top bar */
+  .top{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Archivo Black';font-size:16px}
+  .brand .mk{width:34px;height:34px}
+  .pill{font-size:11px;font-weight:700;color:var(--orange);border:1px solid rgba(255,159,67,.4);
+    background:rgba(255,159,67,.1);border-radius:999px;padding:6px 12px}
+
+  /* hero */
+  .hero{text-align:center;padding:30px 0 18px}
+  .kick{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);font-weight:700}
+  .hero h1{font-family:'Archivo Black';font-size:clamp(34px,9vw,58px);line-height:1.02;margin:14px 0 0}
+  .hero h1 .hl{color:var(--orange)}
+  .hero p.sub{color:var(--muted);font-size:clamp(15px,4vw,18px);max-width:540px;margin:18px auto 0}
+  .cta{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:var(--orange);color:var(--ink);
+    font-family:'Archivo Black';font-size:18px;padding:18px 30px;border-radius:16px;cursor:pointer;
+    box-shadow:0 12px 30px rgba(255,159,67,.3);transition:transform .12s}
+  .cta:active{transform:scale(.97)}
+  .cta-sub{display:block;color:var(--muted);font-size:12.5px;margin-top:12px}
+
+  /* two paths */
+  .paths{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:44px 0 10px}
+  .path{border:1px solid var(--line);border-radius:18px;padding:20px 18px;background:var(--card)}
+  .path.old{opacity:.78}
+  .path.new{border-color:var(--orange);background:linear-gradient(160deg,rgba(255,159,67,.14),rgba(255,210,63,.04))}
+  .path .lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:12px}
+  .path.old .lbl{color:var(--coral)} .path.new .lbl{color:var(--orange)}
+  .path .step{display:flex;align-items:flex-start;gap:9px;font-size:14px;margin-bottom:9px;color:var(--text)}
+  .path .step .n{flex:0 0 auto;font-family:'Archivo Black';font-size:12px;width:20px;color:var(--muted)}
+  .path.old .step.bad{color:var(--muted)}
+  .path .out{margin-top:6px;font-weight:700;font-size:13px}
+  .path.old .out{color:var(--coral)} .path.new .out{color:var(--lime)}
+  @media(max-width:540px){.paths{grid-template-columns:1fr}}
+
+  .section-h{font-family:'Archivo Black';font-size:clamp(22px,6vw,30px);text-align:center;margin:52px 0 6px}
+  .section-s{text-align:center;color:var(--muted);font-size:15px;max-width:520px;margin:0 auto 26px}
+
+  /* learn grid */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+  @media(max-width:540px){.grid{grid-template-columns:1fr}}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 16px}
+  .feat .fem{font-size:28px}
+  .feat .ft{font-family:'Archivo Black';font-size:16px;margin:8px 0 4px}
+  .feat .fd{color:var(--muted);font-size:13.5px;line-height:1.5}
+
+  /* ages */
+  .ages{display:flex;flex-direction:column;gap:11px;margin-top:8px}
+  .age{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 17px}
+  .age .aem{font-size:30px;flex:0 0 auto}
+  .age .at{font-family:'Archivo Black';font-size:15px}
+  .age .ad{color:var(--muted);font-size:13px;margin-top:2px}
+
+  /* closing CTA */
+  .closer{text-align:center;background:linear-gradient(160deg,rgba(255,159,67,.14),rgba(177,140,255,.06));
+    border:1px solid rgba(255,159,67,.35);border-radius:24px;padding:40px 22px;margin:54px 0 10px}
+  .closer h2{font-family:'Archivo Black';font-size:clamp(24px,6.5vw,34px)}
+  .closer p{color:var(--muted);max-width:460px;margin:12px auto 0;font-size:15px}
+
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:34px 0 46px;line-height:1.7}
+  footer a{color:var(--cyan)}
+  .free{display:inline-block;color:var(--lime);font-weight:700;font-size:13px;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <div class="brand">
+      <svg class="mk" viewBox="0 0 96 96" aria-hidden="true">
+        <rect x="6" y="56" width="14" height="28" rx="5" fill="#37e6a4"/>
+        <rect x="24" y="42" width="14" height="42" rx="5" fill="#5ef0bf"/>
+        <rect x="42" y="26" width="14" height="58" rx="5" fill="#c6ff3d"/>
+        <g transform="translate(58,16) rotate(28) translate(-14,-8) scale(0.95)">
+          <path d="M14 52 L8 52 L11 68 Z" fill="#ffae3d"/>
+          <path d="M4 40 L-4 56 L10 48 Z" fill="#ff5a4d"/>
+          <path d="M18 40 L26 56 L12 48 Z" fill="#ff5a4d"/>
+          <rect x="5" y="14" width="12" height="38" rx="6" fill="#eef1f6"/>
+          <path d="M11 2 C16 8 17 12 17 16 L5 16 C5 12 6 8 11 2 Z" fill="#ff5a4d"/>
+          <circle cx="11" cy="28" r="4" fill="#3dd4ff"/>
+        </g>
+      </svg>
+      Money Move$
+    </div>
+    <span class="pill">🏪 The Hustle</span>
+  </div>
+
+  <section class="hero">
+    <div class="kick">For ambitious kids &amp; teens</div>
+    <h1 class="display">You don’t have to wait for a degree and a <span class="hl">job</span>.</h1>
+    <p class="sub">Most people are taught one path: school, debt, then working for someone else. There’s another way — learn a real skill, then <b style="color:var(--text)">build your own thing</b>. The Hustle teaches you how, free, through a game.</p>
+    <a class='cta' href='/game?w=biz'>Start building 🚀</a>
+    <span class="cta-sub">Free · no sign-up · works on phone, tablet &amp; computer</span>
+  </section>
+
+  <section class="paths">
+    <div class="path old">
+      <div class="lbl">The default path</div>
+      <div class="step bad"><span class="n">1</span> 13+ years of school</div>
+      <div class="step bad"><span class="n">2</span> Take on student debt</div>
+      <div class="step bad"><span class="n">3</span> Get a job</div>
+      <div class="step bad"><span class="n">4</span> Build someone else’s dream</div>
+      <div class="out">↓ Trade your time for a paycheck</div>
+    </div>
+    <div class="path new">
+      <div class="lbl">The Hustle path</div>
+      <div class="step"><span class="n">1</span> Learn a real, in-demand skill</div>
+      <div class="step"><span class="n">2</span> Apprentice — earn while you learn</div>
+      <div class="step"><span class="n">3</span> Start small, make your first sale</div>
+      <div class="step"><span class="n">4</span> Build &amp; grow your own thing</div>
+      <div class="out">↑ Own your time and your future</div>
+    </div>
+  </section>
+  <p class="section-s" style="margin-top:16px">Both paths can work — but almost no one teaches kids the second one. We do.</p>
+
+  <h2 class="section-h">What you’ll actually learn</h2>
+  <p class="section-s">Real skills, taught the fun way — then a checklist to do it for real.</p>
+  <div class="grid">
+    <div class="feat"><div class="fem">💡</div><div class="ft">Find a real idea</div><div class="fd">Spot a problem people will actually pay to fix — not just a cool idea.</div></div>
+    <div class="feat"><div class="fem">🏷️</div><div class="ft">Price for profit</div><div class="fd">Know your costs and margin so every sale actually makes money.</div></div>
+    <div class="feat"><div class="fem">📣</div><div class="ft">Win customers</div><div class="fd">Find exactly who buys, where they are, and how to earn referrals.</div></div>
+    <div class="feat"><div class="fem">💵</div><div class="ft">Manage the cash</div><div class="fd">Why profit isn’t cash, and how to never run your business dry.</div></div>
+    <div class="feat"><div class="fem">🚀</div><div class="ft">The Build Run</div><div class="fd">Run a whole business in minutes — pricing, hiring, a viral hit, a bad review — and see how it turns out.</div></div>
+    <div class="feat"><div class="fem">🧠</div><div class="ft">An AI mentor</div><div class="fd">Learn to use AI to help you solve problems — it guides you with questions instead of just handing answers.</div></div>
+  </div>
+
+  <h2 class="section-h">A real plan for your age</h2>
+  <p class="section-s">The first question every kid asks is “where do I get the money to start?” — we answer it for exactly where you are.</p>
+  <div class="ages">
+    <div class="age"><div class="aem">🍋</div><div><div class="at">Middle school</div><div class="ad">A lemonade stand or dog-walking — start with a tiny loan you pay back or your allowance.</div></div></div>
+    <div class="age"><div class="aem">👟</div><div><div class="at">High school</div><div class="ad">A side hustle — reselling, tutoring, detailing — funded by savings or pre-orders.</div></div></div>
+    <div class="age"><div class="aem">💻</div><div><div class="at">College</div><div class="ad">Freelance your skill or run an online shop — start near $0, no debt.</div></div></div>
+    <div class="age"><div class="aem">🔧</div><div><div class="at">Young adult</div><div class="ad">A real registered business — validate first, then bootstrap from revenue.</div></div></div>
+  </div>
+
+  <h2 class="section-h">Real talk: how to raise your first money</h2>
+  <p class="section-s">Here’s the truth most people won’t tell you: when you’re just starting out with no income, no credit history, and nothing to put up as collateral, <b style="color:var(--text)">a bank or credit union almost certainly won’t lend you money</b> — that’s just how lending works. So where does a brand-new founder actually get it?</p>
+  <div class="grid">
+    <div class="feat">
+      <div class="fem">🥾</div>
+      <div class="ft">1. Bootstrap (start here)</div>
+      <div class="fd">Fund it yourself from savings, allowance, or your <b style="color:var(--text)">first few sales</b>. Start so small you barely need money. It’s the cheapest way and you keep 100% ownership.</div>
+    </div>
+    <div class="feat" style="border-color:rgba(255,159,67,.45);background:linear-gradient(160deg,rgba(255,159,67,.12),rgba(255,210,63,.03))">
+      <div class="fem">🤝</div>
+      <div class="ft">2. The 3 F’s</div>
+      <div class="fd"><b style="color:var(--orange)">Friends, Family &amp; “Fools.”</b> It’s the classic name for your first outside money — people who back <i>you</i> before the numbers prove anything. It’s real money <b style="color:var(--text)">and</b> real relationships: agree out loud whether it’s a loan or a gift, put the terms in writing, and only take what you can pay back.</div>
+    </div>
+    <div class="feat">
+      <div class="fem">🏦</div>
+      <div class="ft">3. Banks come later</div>
+      <div class="fd">Once you have <b style="color:var(--text)">revenue, a track record, or collateral</b>, that’s when banks and credit unions will lend. You earn access by building the history first — so let’s talk about where to build it. 👇</div>
+    </div>
+  </div>
+
+  <h2 class="section-h">Where to keep your money</h2>
+  <p class="section-s">Once you make your first dollar, you need a safe home for it — and it’s where you start building the track record that unlocks real lending later. For most young people, the best first stop isn’t a giant national bank.</p>
+
+  <div class="feat" style="border-color:rgba(198,255,61,.4);background:linear-gradient(160deg,rgba(198,255,61,.10),rgba(55,230,164,.04));margin-bottom:14px">
+    <div class="fem">🏦</div>
+    <div class="ft">Start with a small community bank or credit union</div>
+    <div class="fd">Community banks and credit unions are locally run — and credit unions are owned by their members, not outside shareholders. That usually means <b style="color:var(--text)">lower fees, smaller minimum balances, real people who know your area, and lending decisions made locally</b>. When you’re opening a first account or asking for your first small business loan, that relationship can make all the difference.</div>
+  </div>
+
+  <p class="section-s" style="margin:6px auto 18px">A few San Antonio credit unions that score well with independent rating services:</p>
+  <div class="grid">
+    <div class="feat">
+      <div class="fem">⭐</div>
+      <div class="ft">Randolph-Brooks FCU (RBFCU)</div>
+      <div class="fd">Texas’s largest credit union, based in the San Antonio area, serving South Central Texas. Rated for <b style="color:var(--lime)">excellent financial strength</b> by Weiss Ratings (June 2026), including top-tier capitalization.</div>
+    </div>
+    <div class="feat">
+      <div class="fem">⭐</div>
+      <div class="ft">Security Service FCU</div>
+      <div class="fd">Headquartered in San Antonio. Earns an <b style="color:var(--lime)">“A” health grade</b> from DepositAccounts.com (Q1 2026 data) — strong on capital and deposit growth.</div>
+    </div>
+    <div class="feat">
+      <div class="fem">⭐</div>
+      <div class="ft">Generations FCU</div>
+      <div class="fd">San Antonio member-owned credit union since 1940. Earns a <b style="color:var(--lime)">“B+” health grade</b> from DepositAccounts.com (Q1 2026 data).</div>
+    </div>
+  </div>
+
+  <p class="section-s" style="margin:24px auto 18px">No local credit union a fit? These rank near the <b style="color:var(--text)">top nationwide</b> with independent rating services — and are open to almost anyone in the U.S.:</p>
+  <div class="grid">
+    <div class="feat">
+      <div class="fem">🇺🇸</div>
+      <div class="ft">Alliant Credit Union</div>
+      <div class="fd">Frequently ranked the <b style="color:var(--lime)">#1 credit union nationwide</b> (NerdWallet, Yahoo Finance 2026). Anyone can join — no monthly or overdraft fees, strong savings &amp; CD rates, and out-of-network ATM fee reimbursement.</div>
+    </div>
+    <div class="feat">
+      <div class="fem">🇺🇸</div>
+      <div class="ft">PenFed (Pentagon Federal)</div>
+      <div class="fd">One of the largest U.S. credit unions with an <b style="color:var(--lime)">open charter</b> — anyone can join by opening a savings account. Consistently rated among the best for loan and deposit rates.</div>
+    </div>
+    <div class="feat">
+      <div class="fem">🇺🇸</div>
+      <div class="ft">Connexus Credit Union</div>
+      <div class="fd">300,000+ members across all 50 states and a <b style="color:var(--lime)">frequent “best of” pick</b> (Bankrate, CNBC Select) for high-yield checking and low fees. Open to almost anyone.</div>
+    </div>
+  </div>
+
+  <p class="section-s" style="margin-top:16px;font-size:13px">Ratings and rankings change over time, and each credit union has its own membership rules, so always check the current rating and whether you’re eligible to join before opening an account. This is for learning only — not an endorsement or financial advice.</p>
+
+  <section class="closer">
+    <h2 class="display">Your future doesn’t have to be the default.</h2>
+    <p>Spend ten minutes learning to build something of your own. It’s free, it’s a game, and it might change how you see your whole life.</p>
+    <a class='cta' href='/game?w=biz'>Start building 🚀</a>
+    <span class="free">100% free · in-game rewards only</span>
+  </section>
+
+  <footer>
+    Independent financial &amp; entrepreneurship education · not financial advice.<br>
+    Prefer the money side first? <a href='/game'>Play Money Move$: The Climb →</a>
+  </footer>
+
+</div>
+</body>
+</html>

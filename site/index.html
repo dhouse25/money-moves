@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Money Move$ — Small moves. Big future.</title>
+<meta name="description" content="Free financial literacy game for teens, young adults, and anyone catching up. Six money moves, a toolkit, and a 7-day challenge — no jargon, no guilt trips.">
+<meta name="theme-color" content="#0d0f14">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Money Move$">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Money Move$ — Small moves. Big future.">
+<meta property="og:description" content="Duolingo for money. Free game that turns real money skills into a climb you actually want to keep playing.">
+<meta property="og:image" content="/icons/icon-512.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Money Move$ — Small moves. Big future.">
+<meta name="twitter:description" content="Free financial literacy game. Level up your money skills — start free.">
+<meta name="twitter:image" content="/icons/icon-512.png">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}</script>
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/favicon-32.png" type="image/png" sizes="32x32">
+<script src="/js/analytics.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0d0f14;
+    --ink-2:#14171f;
+    --card:#191d27;
+    --card-2:#1f2430;
+    --line:#2c3342;
+    --text:#f4f6fb;
+    --muted:#a3acc0;
+    --lime:#c6ff3d;
+    --lime-deep:#a6e417;
+    --coral:#ff5e5b;
+    --cyan:#3dd4ff;
+    --yellow:#ffd23f;
+    --violet:#b18cff;
+    --radius:22px;
+    --shadow:0 18px 40px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,'Noto Color Emoji','Apple Color Emoji','Segoe UI Emoji',sans-serif;
+    background:
+      radial-gradient(900px 500px at 12% -5%, rgba(198,255,61,.10), transparent 60%),
+      radial-gradient(820px 520px at 100% 5%, rgba(61,212,255,.10), transparent 55%),
+      radial-gradient(700px 600px at 85% 100%, rgba(255,94,91,.08), transparent 60%),
+      var(--ink);
+    color:var(--text);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .display{font-family:'Archivo Black',Impact,system-ui,sans-serif;letter-spacing:-.5px;line-height:.98}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+  a{color:inherit}
+
+  /* ===== NAV / brand bar ===== */
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 22px;max-width:1080px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:11px}
+  .brand svg.mark{width:42px;height:42px;flex:0 0 auto;filter:drop-shadow(0 6px 16px rgba(198,255,61,.25))}
+  .brand .wm{font-family:'Archivo Black',Impact,sans-serif;font-size:20px;letter-spacing:-.5px;line-height:1}
+  .brand .wm .d{color:var(--lime)}
+  .brand small{display:block;color:var(--muted);font-weight:500;letter-spacing:.3px;font-size:10.5px;text-transform:none;margin-top:3px}
+  .topbar .pill{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:7px 13px;border-radius:999px}
+
+  /* ===== HERO ===== */
+  .hero{position:relative;padding:34px 0 18px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:600;
+    letter-spacing:2px;text-transform:uppercase;color:var(--ink);
+    background:var(--lime);padding:7px 14px;border-radius:999px;transform:rotate(-1.5deg);
+    box-shadow:0 8px 20px rgba(198,255,61,.30)
+  }
+  h1.hero-title{font-size:clamp(40px,8vw,84px);margin:18px 0 8px}
+  h1.hero-title .hl{color:var(--lime)}
+  h1.hero-title .hl2{color:var(--cyan)}
+  .ticker-row{
+    font-size:clamp(18px,3.4vw,30px);font-weight:700;margin:6px 0 14px;
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:10px
+  }
+  .ticker-row .lead{color:var(--muted);font-weight:500}
+  .ticker{
+    position:relative;display:inline-block;color:var(--ink);
+    background:var(--yellow);padding:2px 14px;border-radius:12px;
+    transform:rotate(-1deg);min-width:230px;text-align:center;
+    box-shadow:0 8px 18px rgba(255,210,63,.30);
+  }
+  .ticker .dots{letter-spacing:2px}
+  .hero-sub{max-width:640px;color:var(--muted);font-size:clamp(15px,2.3vw,18px);margin-bottom:22px}
+  .hero-sub b{color:var(--text)}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;
+    padding:14px 22px;border-radius:14px;text-decoration:none;border:none;cursor:pointer;
+    transition:transform .14s ease, box-shadow .14s ease;font-family:inherit;
+  }
+  .btn:hover{transform:translateY(-3px)}
+  .btn-lime{background:var(--lime);color:var(--ink);box-shadow:0 12px 26px rgba(198,255,61,.30)}
+  .btn-ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--cyan);box-shadow:0 12px 26px rgba(61,212,255,.18)}
+
+  /* Parent trust strip */
+  .parent-strip{
+    display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;
+    margin-top:22px;padding:16px 18px;border-radius:16px;
+    background:rgba(61,212,255,.07);border:1px solid rgba(61,212,255,.28);
+    max-width:720px;
+  }
+  .parent-strip .ps-em{font-size:26px;line-height:1;flex:0 0 auto}
+  .parent-strip .ps-body{flex:1;min-width:200px}
+  .parent-strip .ps-h{font-family:'Archivo Black',Impact,sans-serif;font-size:15px;margin-bottom:4px;color:var(--cyan)}
+  .parent-strip p{color:var(--muted);font-size:13.5px;line-height:1.45;margin:0}
+  .parent-strip .ps-cta{
+    flex:0 0 auto;align-self:center;font-weight:700;font-size:13px;color:var(--ink);
+    background:var(--cyan);padding:10px 14px;border-radius:11px;text-decoration:none;white-space:nowrap;
+  }
+  .parent-strip .ps-cta:hover{transform:translateY(-2px)}
+
+  /* Waitlist */
+  .waitlist{margin-top:20px;max-width:520px;padding:16px 18px;border-radius:16px;
+    background:var(--card);border:1px solid var(--line)}
+  .waitlist .wl-label{display:block;font-weight:700;font-size:14px;margin-bottom:10px}
+  .waitlist .wl-row{display:flex;gap:8px;flex-wrap:wrap}
+  .waitlist input{
+    flex:1;min-width:180px;background:var(--ink-2);border:1.5px solid var(--line);color:var(--text);
+    border-radius:12px;padding:12px 14px;font-family:inherit;font-size:15px;outline:none;
+  }
+  .waitlist input:focus{border-color:var(--lime)}
+  .waitlist .wl-btn{padding:12px 18px;font-size:14px}
+  .waitlist .wl-note{font-size:12px;color:var(--muted);margin-top:10px}
+  .waitlist.done{border-color:var(--lime);background:rgba(198,255,61,.08)}
+  .waitlist.done .wl-label{color:var(--lime)}
+
+  /* ===== generic section ===== */
+  section{padding:30px 0}
+  .kicker{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);font-weight:700;margin-bottom:8px}
+  h2.sec{font-size:clamp(26px,5vw,46px);margin-bottom:6px}
+  .sec-lead{color:var(--muted);max-width:680px;margin-bottom:22px;font-size:16px}
+
+  /* ===== COMPOUND / time machine ===== */
+  .timebox{
+    background:linear-gradient(135deg, rgba(177,140,255,.14), rgba(61,212,255,.07));
+    border:1px solid var(--line);border-radius:var(--radius);padding:26px;
+    display:grid;grid-template-columns:1.05fr .95fr;gap:26px;align-items:center;box-shadow:var(--shadow)
+  }
+  .timebox .big-num{font-family:'Archivo Black';font-size:clamp(46px,9vw,86px);color:var(--lime);line-height:.9}
+  .timebox .big-cap{color:var(--muted);font-size:15px;margin-top:8px}
+  .slider-card{background:var(--ink-2);border:1px solid var(--line);border-radius:18px;padding:20px}
+  .slider-card label{display:block;font-weight:700;margin-bottom:4px}
+  .slider-val{color:var(--lime);font-family:'Archivo Black';font-size:30px}
+  input[type=range]{width:100%;accent-color:var(--lime);height:6px;margin:14px 0 4px;cursor:pointer}
+  .slider-foot{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+  .mini-note{font-size:12px;color:var(--muted);margin-top:14px}
+  .compare{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+  .compare .chip{flex:1;min-width:120px;background:var(--ink-2);border:1px solid var(--line);border-radius:12px;padding:12px}
+  .compare .chip .n{font-family:'Archivo Black';font-size:22px}
+  .compare .chip.start .n{color:var(--lime)}
+  .compare .chip.late .n{color:var(--coral)}
+  .compare .chip small{display:block;color:var(--muted);font-size:11px;margin-top:2px}
+
+  /* ===== PROOF / examples ===== */
+  .proof-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .proof-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+  .proof-card.spy{border-top:3px solid var(--cyan)}
+  .proof-card.aapl{border-top:3px solid var(--lime)}
+  .proof-card.nvda{border-top:3px solid var(--violet)}
+  .proof-card .p-label{font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:6px}
+  .proof-card .p-num{font-family:'Archivo Black';font-size:clamp(30px,5vw,44px);line-height:.95}
+  .proof-card.spy .p-num{color:var(--cyan)}
+  .proof-card.aapl .p-num{color:var(--lime)}
+  .proof-card.nvda .p-num{color:var(--violet)}
+  .proof-card .p-sub{font-size:13.5px;color:var(--muted);margin-top:8px}
+  .holdbox{margin-top:16px;background:linear-gradient(135deg,rgba(198,255,61,.12),rgba(61,212,255,.06));border:1px solid var(--line);border-left:5px solid var(--lime);border-radius:var(--radius);padding:22px}
+  .holdbox .hold-h{font-family:'Archivo Black',Impact,sans-serif;font-size:clamp(17px,3vw,23px);line-height:1.15;margin-bottom:8px}
+  .holdbox .hold-h .no{color:var(--coral)}
+  .holdbox p{color:var(--muted);font-size:14.5px}
+  .holdbox p b{color:var(--text)}
+
+  /* ===== baby / Trump account callout ===== */
+  .babybox{background:linear-gradient(135deg,rgba(255,210,63,.14),rgba(177,140,255,.08));border:1px solid var(--line);border-left:5px solid var(--yellow);border-radius:var(--radius);padding:24px;margin-top:8px}
+  .babybox .baby-h{font-family:'Archivo Black',Impact,sans-serif;font-size:clamp(18px,3.2vw,25px);line-height:1.12;margin-bottom:10px}
+  .babybox p{color:var(--muted);font-size:14.5px}
+  .babybox p b{color:var(--text)}
+  .baby-cta{display:inline-block;margin-top:14px;background:var(--yellow);color:var(--ink);font-weight:700;font-size:14.5px;padding:11px 18px;border-radius:12px;text-decoration:none;transition:transform .14s ease}
+  .baby-cta:hover{transform:translateY(-3px)}
+  .baby-note{font-size:12px;color:var(--muted);margin-top:12px}
+
+  /* ===== MOVES grid ===== */
+  .moves{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .move{
+    position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 22px 20px;overflow:hidden;transition:transform .16s ease,border-color .16s ease;
+  }
+  .move:hover{transform:translateY(-5px)}
+  .move .num{font-family:'Archivo Black';font-size:54px;line-height:.8;opacity:.18;position:absolute;top:14px;right:18px}
+  .move .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:12px}
+  .move h3{font-size:21px;margin-bottom:7px;max-width:78%}
+  .move p{color:var(--muted);font-size:14.5px}
+  .move p b{color:var(--text)}
+  .m1{border-top:3px solid var(--lime)} .m1 .tag{background:rgba(198,255,61,.16);color:var(--lime)} .m1:hover{border-color:var(--lime)}
+  .m2{border-top:3px solid var(--coral)} .m2 .tag{background:rgba(255,94,91,.16);color:var(--coral)} .m2:hover{border-color:var(--coral)}
+  .m3{border-top:3px solid var(--cyan)} .m3 .tag{background:rgba(61,212,255,.16);color:var(--cyan)} .m3:hover{border-color:var(--cyan)}
+  .m4{border-top:3px solid var(--yellow)} .m4 .tag{background:rgba(255,210,63,.16);color:var(--yellow)} .m4:hover{border-color:var(--yellow)}
+  .m5{border-top:3px solid var(--violet)} .m5 .tag{background:rgba(177,140,255,.16);color:var(--violet)} .m5:hover{border-color:var(--violet)}
+  .m6{border-top:3px solid #6affc0} .m6 .tag{background:rgba(106,255,192,.16);color:#6affc0} .m6:hover{border-color:#6affc0}
+
+  /* ===== TOOLKIT ===== */
+  .tools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .tool{
+    display:flex;flex-direction:column;background:var(--card-2);border:1px solid var(--line);
+    border-radius:var(--radius);padding:20px;text-decoration:none;color:var(--text);
+    transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+  }
+  .tool:hover{transform:translateY(-6px);border-color:var(--lime);box-shadow:0 16px 30px rgba(0,0,0,.4)}
+  .tool .ic{
+    width:46px;height:46px;border-radius:13px;display:grid;place-items:center;
+    font-family:'Archivo Black';font-size:20px;color:var(--ink);margin-bottom:13px
+  }
+  .tool h4{font-size:18px;margin-bottom:2px;display:flex;align-items:center;gap:8px}
+  .tool .role{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:9px}
+  .tool p{font-size:13.5px;color:var(--muted);flex:1}
+  .tool .go{margin-top:13px;font-weight:700;font-size:13.5px;color:var(--lime);display:inline-flex;align-items:center;gap:6px}
+  .tool .url{font-size:11px;color:var(--muted);margin-top:3px;word-break:break-all}
+  .free{font-size:10px;font-weight:700;background:var(--lime);color:var(--ink);padding:2px 7px;border-radius:999px;letter-spacing:.5px}
+  .paid{font-size:10px;font-weight:700;background:var(--yellow);color:var(--ink);padding:2px 7px;border-radius:999px;letter-spacing:.5px}
+  .local{font-size:10px;font-weight:700;background:var(--cyan);color:var(--ink);padding:2px 7px;border-radius:999px;letter-spacing:.5px}
+  .tool-disc{font-size:12.5px;color:var(--muted);max-width:680px;margin:-8px 0 18px;padding:12px 14px;border-radius:12px;
+    background:rgba(255,210,63,.08);border:1px solid rgba(255,210,63,.25)}
+  .tool-disc b{color:var(--text)}
+
+  /* ===== ASK CLAUDE ===== */
+  .claude-box{
+    background:linear-gradient(135deg, rgba(255,210,63,.10), rgba(255,94,91,.08));
+    border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)
+  }
+  .prompts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:16px}
+  .prompt{
+    background:var(--ink-2);border:1px solid var(--line);border-left:3px solid var(--yellow);
+    border-radius:12px;padding:14px 16px;font-size:14px;color:var(--text);position:relative
+  }
+  .prompt:before{content:"“";font-family:'Archivo Black';color:var(--yellow);font-size:24px;line-height:0;position:relative;top:8px;margin-right:4px}
+  .prompt span{color:var(--muted)}
+
+  /* ===== CHALLENGE ===== */
+  .challenge{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+  .days{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:8px}
+  .day{
+    display:flex;align-items:flex-start;gap:12px;background:var(--ink-2);border:1px solid var(--line);
+    border-radius:13px;padding:13px 15px;cursor:pointer;transition:border-color .14s ease,background .14s ease;user-select:none
+  }
+  .day:hover{border-color:var(--cyan)}
+  .day .box{
+    width:24px;height:24px;border-radius:7px;border:2px solid var(--line);flex:0 0 auto;
+    display:grid;place-items:center;font-weight:900;color:var(--ink);transition:.14s
+  }
+  .day.done{background:rgba(198,255,61,.07);border-color:var(--lime)}
+  .day.done .box{background:var(--lime);border-color:var(--lime)}
+  .day .d-num{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);font-weight:700}
+  .day .d-txt{font-size:14px}
+  .day.done .d-txt{text-decoration:line-through;color:var(--muted)}
+  .progress-wrap{margin-top:18px}
+  .bar{height:12px;background:var(--ink-2);border-radius:999px;overflow:hidden;border:1px solid var(--line)}
+  .bar > div{height:100%;width:0;background:linear-gradient(90deg,var(--lime),var(--cyan));transition:width .35s ease}
+  .progress-label{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px;font-weight:600}
+  #cheer{color:var(--lime)}
+
+  /* ===== FOOTER ===== */
+  footer{border-top:1px solid var(--line);margin-top:18px;padding:26px 0 50px}
+  .foot-grid{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:flex-end}
+  .disclaimer{font-size:11.5px;color:var(--muted);max-width:640px;line-height:1.6}
+  .foot-brand{font-family:'Archivo Black';font-size:20px}
+  .foot-brand span{color:var(--lime)}
+  .foot-links{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px}
+  .foot-links a{color:var(--cyan);font-size:13px;font-weight:600;text-decoration:none}
+  .foot-links a:hover{color:var(--lime)}
+  body.parent-mode .parent-strip{
+    border-color:var(--lime);background:linear-gradient(135deg,rgba(198,255,61,.12),rgba(61,212,255,.08));
+    box-shadow:0 0 0 1px rgba(198,255,61,.2);
+  }
+  body.parent-mode .eyebrow{background:var(--cyan)}
+
+  /* ===== responsive ===== */
+  @media (max-width:820px){
+    .timebox{grid-template-columns:1fr}
+    .proof-grid{grid-template-columns:1fr}
+    .moves{grid-template-columns:1fr}
+    .tools{grid-template-columns:repeat(2,1fr)}
+    .prompts,.days{grid-template-columns:1fr}
+  }
+  @media (max-width:520px){
+    .tools{grid-template-columns:1fr}
+    .move h3{max-width:100%}
+  }
+
+  /* ===== PRINT (PDF) — dense 2-page layout ===== */
+  /* ===== Future You pill — follows you down the page ===== */
+  #fyPill{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;z-index:60;display:flex;align-items:center;gap:10px;
+    background:rgba(13,15,20,.92);backdrop-filter:blur(8px);border:1px solid rgba(198,255,61,.45);border-radius:99px;
+    padding:9px 18px;cursor:pointer;box-shadow:0 6px 24px rgba(0,0,0,.45);max-width:94vw;white-space:nowrap;overflow:hidden}
+  #fyPill .fyp-k{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan,#5fd0ff);font-weight:800}
+  #fyPill .fyp-amt{font-family:'Archivo Black',sans-serif;font-size:18px;color:var(--lime,#c6ff3d)}
+  #fyPill .fyp-day{font-size:11.5px;color:var(--muted,#9aa3b2)}
+  #fyPill:hover{border-color:var(--lime,#c6ff3d)}
+  @media (max-width:560px){#fyPill .fyp-day{display:none}}
+  @keyframes fyPop{0%{transform:translateX(-50%) scale(1)}50%{transform:translateX(-50%) scale(1.06)}100%{transform:translateX(-50%) scale(1)}}
+  #fyPill.pop{animation:fyPop .4s ease}
+  @media print{
+    @page{size:A4;margin:8mm}
+    body{background:#0d0f14 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:10px}
+    .wrap{padding:0 4px}
+    .no-print,.cta-row,.topbar .pill,#fyPill{display:none !important}
+    .move:hover,.tool:hover,.btn:hover{transform:none}
+    a{text-decoration:none}
+
+    .topbar{padding:0 4px 4px}
+    .brand .dot{width:24px;height:24px;font-size:11px}
+    .hero{padding:6px 0 2px}
+    .eyebrow{font-size:9px;padding:4px 9px;box-shadow:none}
+    h1.hero-title{font-size:30px;margin:8px 0 4px}
+    .ticker-row{font-size:14px;margin:3px 0 6px}
+    .ticker{box-shadow:none;padding:1px 9px;min-width:auto}
+    .hero-sub{font-size:10px;max-width:100%;margin-bottom:4px}
+
+    section{padding:8px 0}
+    .kicker{font-size:8.5px;letter-spacing:2px;margin-bottom:2px}
+    h2.sec{font-size:20px}
+    .sec-lead{font-size:9.5px;max-width:100%;margin-bottom:7px}
+
+    .timebox{grid-template-columns:1fr;padding:12px;gap:6px;box-shadow:none}
+    .timebox .big-num{font-size:38px}
+    .timebox .big-cap{font-size:9.5px;margin-top:3px}
+    .compare{margin-top:8px;gap:7px}
+    .compare .chip{padding:7px}
+    .compare .chip .n{font-size:16px}
+    .mini-note{font-size:8.5px;margin-top:7px}
+
+    .proof-grid{gap:10px}
+    .proof-card{padding:12px;break-inside:avoid}
+    .proof-card .p-num{font-size:34px}
+    .proof-card .p-label{font-size:10px}
+    .proof-card .p-sub{font-size:9px;margin-top:5px}
+    .holdbox{padding:14px;margin-top:12px;box-shadow:none}
+    .holdbox .hold-h{font-size:15px}
+    .holdbox p{font-size:9.5px}
+    .babybox{padding:14px;margin-top:10px;break-inside:avoid}
+    .babybox .baby-h{font-size:15px}
+    .babybox p{font-size:9.5px}
+    .baby-cta{padding:7px 12px;font-size:10px;margin-top:8px}
+    .baby-note{font-size:8px;margin-top:7px}
+
+    .moves{grid-template-columns:repeat(3,1fr);gap:7px}
+    .move{padding:9px;border-radius:11px;break-inside:avoid}
+    .move .num{font-size:26px;top:6px;right:9px}
+    .move .tag{font-size:7.5px;padding:2px 6px;margin-bottom:5px}
+    .move h3{font-size:12px;max-width:100%;margin-bottom:4px}
+    .move p{font-size:8.5px;line-height:1.35}
+
+    #toolkit{break-before:page;padding-top:4px}
+    .tools{grid-template-columns:repeat(3,1fr);gap:7px}
+    .tool{padding:9px;border-radius:11px;break-inside:avoid}
+    .tool .ic{width:28px;height:28px;font-size:12px;border-radius:9px;margin-bottom:6px}
+    .tool h4{font-size:12px}
+    .tool .role{font-size:7.5px;margin-bottom:4px}
+    .tool p{font-size:8px;line-height:1.32}
+    .tool .go{font-size:8.5px;margin-top:6px}
+    .tool .url{font-size:7.5px}
+    .free{font-size:7px;padding:1px 5px}
+
+    .claude-box{padding:12px;box-shadow:none}
+    .prompts{grid-template-columns:repeat(3,1fr);gap:6px;margin-top:9px}
+    .prompt{font-size:8px;padding:7px 8px;line-height:1.3}
+    .prompt:before{font-size:16px}
+
+    .challenge{padding:12px;box-shadow:none}
+    .days{grid-template-columns:repeat(2,1fr);gap:5px}
+    .day{padding:6px 8px}
+    .day .box{width:15px;height:15px;border-radius:5px}
+    .day .d-num{font-size:8px}
+    .day .d-txt{font-size:8.5px}
+    .bar{height:8px}
+    .progress-label{font-size:9px;margin-top:5px}
+
+    footer{margin-top:8px;padding:10px 0 0;break-inside:avoid}
+    #moves{break-before:page}
+    #challenge{break-before:page}
+    .disclaimer{font-size:7.5px;line-height:1.45;max-width:100%}
+    .foot-brand{font-size:15px}
+  }
+</style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 96 96" role="img" aria-label="Money Move$ logo"><rect x="6" y="56" width="14" height="28" rx="5" fill="#37e6a4"/><rect x="24" y="42" width="14" height="42" rx="5" fill="#5ef0bf"/><rect x="42" y="26" width="14" height="58" rx="5" fill="#c6ff3d"/><g transform="translate(58,16) rotate(28) translate(-14,-8) scale(0.95)"><path d="M14 52 L8 52 L11 68 Z" fill="#ffae3d"/><path d="M13 52 L9 52 L11 62 Z" fill="#ffd23f"/><path d="M4 40 L-4 56 L10 48 Z" fill="#ff5a4d"/><path d="M18 40 L26 56 L12 48 Z" fill="#ff5a4d"/><rect x="5" y="14" width="12" height="38" rx="6" fill="#eef1f6"/><path d="M11 2 C16 8 17 12 17 16 L5 16 C5 12 6 8 11 2 Z" fill="#ff5a4d"/><circle cx="11" cy="28" r="4" fill="#3dd4ff"/></g><circle cx="52" cy="12" r="2.2" fill="#3dd4ff"/><circle cx="58" cy="20" r="1.5" fill="#3dd4ff" opacity="0.7"/></svg>
+      <div><span class="wm">Money Move<span class="d">$</span></span><small>Small moves. Big future.</small></div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <a href="/parents" class="pill no-print" style="text-decoration:none;color:var(--cyan);border-color:rgba(61,212,255,.4)">For parents</a>
+      <div class="pill no-print">Independent financial education · 2026</div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero wrap">
+    <span class="eyebrow">🚀 Free money game built for teens &amp; young adults</span>
+    <h1 class="hero-title display">Your money.<br>Your future.<br><span class="hl">Let's</span> <span class="hl2">build it.</span></h1>
+    <div class="ticker-row">
+      <span class="lead">Right now, future-you is</span>
+      <span class="ticker"><span id="ticker-word">compounding</span><span class="dots">…</span></span>
+    </div>
+    <p class="hero-sub">No jargon. No lectures. No adult guilt trips. Just a free game that teaches real money skills — <b>levels, streaks, ranks</b> — plus six moves and a 7-day challenge. Play on your phone. Flex your future. 🚀</p>
+    <div class="cta-row">
+      <a class='btn btn-lime' href='/game' data-track="cta_play_hero">🎮 Play free — first win in ~2 min</a>
+      <a class='btn btn-ghost' href='/business' style='border-color:#ff9f43;color:#ff9f43' data-track="cta_hustle">🏪 Build a business</a>
+      <button type="button" class="btn btn-ghost" id="shareSite" style="border-color:var(--violet);color:var(--violet)">📣 Share with a friend</button>
+      <a href="#toolkit" class="btn btn-ghost">Jump to the toolkit ↓</a>
+      <a href="#challenge" class="btn btn-ghost">Take the 7-day challenge</a>
+    </div>
+    <!-- Parent trust strip (teens play; parents need the green light) -->
+    <div class="parent-strip no-print" id="parentStrip">
+      <div class="ps-em" aria-hidden="true">🛡️</div>
+      <div class="ps-body">
+        <div class="ps-h">Parents: this is safe to share</div>
+        <p>100% free. No credit card. No loot boxes. No chat with strangers. Real money skills (budgeting, saving, investing basics) wrapped in a game — honor-system missions only, nothing is sold to kids. <a href="/parents" style="color:var(--cyan);font-weight:700">Full parent guide →</a></p>
+      </div>
+      <a class="ps-cta" href="/game" data-track="cta_play_parent">Let them play →</a>
+    </div>
+    <!-- Email waitlist -->
+    <form class="waitlist no-print" id="waitlist" autocomplete="email">
+      <label class="wl-label" for="wlEmail">Get the free 7-day money plan + early drops</label>
+      <div class="wl-row">
+        <input id="wlEmail" name="email" type="email" required placeholder="you@email.com" inputmode="email" enterkeyhint="done">
+        <button type="submit" class="btn btn-lime wl-btn">Send it 🔥</button>
+      </div>
+      <p class="wl-note" id="wlNote">No spam. Unsubscribe anytime. Built for teens &amp; the adults who love them.</p>
+    </form>
+  </header>
+
+  <!-- TIME MACHINE / COMPOUND -->
+  <section class="wrap" id="why">
+    <div class="kicker">The cheat code</div>
+    <h2 class="sec display">Your superpower is <span style="color:var(--lime)">time</span>, not salary.</h2>
+    <p class="sec-lead">Money you invest in your 20s and 30s has decades to grow on its own — that's compounding. Park it in an S&amp;P 500 index fund (like SPY) and you're riding the growth of America's 500 biggest companies. Slide your age, amount, and return and watch it work.</p>
+    <div class="timebox">
+      <div>
+        <div class="big-num" id="fvOut">$1,263,840</div>
+        <div class="big-cap" id="fvCap">…if you invest <b style="color:var(--text)">$200/mo</b> from age <b style="color:var(--text)">25</b> to 65 at a 10% average return. You'd only put in <b id="contribOut" style="color:var(--text)">$96,000</b> of your own money.</div>
+        <div class="compare">
+          <div class="chip start"><div class="n" id="startNum">$1.3M</div><small id="startCap">Start at 25</small></div>
+          <div class="chip late"><div class="n" id="lateNum">$452k</div><small id="lateCap">Wait 10 yrs (start 35)</small></div>
+        </div>
+        <div class="mini-note">Same monthly amount. Waiting just 10 years can cost you more than HALF the final pot — that's the price of "I'll start later." 😬</div>
+      </div>
+      <div class="slider-card no-print">
+        <label for="amt">I could invest each month…</label>
+        <div class="slider-val" id="amtVal">$200</div>
+        <input id="amt" type="range" min="0" max="5000" step="25" value="200">
+        <div class="slider-foot"><span>$0</span><span>$5,000+</span></div>
+
+        <label for="lump" style="margin-top:18px">One-time lump sum to start (optional)…</label>
+        <div class="slider-val" id="lumpVal">$0</div>
+        <input id="lump" type="range" min="0" max="1000000" step="1000" value="0">
+        <div class="slider-foot"><span>$0</span><span>$1,000,000+</span></div>
+
+        <label for="age" style="margin-top:18px">My age right now…</label>
+        <div class="slider-val" id="ageVal">25</div>
+        <input id="age" type="range" min="18" max="64" step="1" value="25">
+        <div class="slider-foot"><span>18</span><span>64</span></div>
+
+        <label for="rate" style="margin-top:18px">Average yearly return…</label>
+        <div class="slider-val"><span id="rateVal">10</span>%</div>
+        <input id="rate" type="range" min="2" max="30" step="0.5" value="10">
+        <div class="slider-foot"><span>2%</span><span>S&amp;P 500 ≈10%</span><span>30%</span></div>
+
+        <div class="mini-note">Default 10% = the S&amp;P 500's long-run average (about 7% after inflation; the last decade ran ~15%). Compounded monthly to age 65. Markets rise and fall — this is an illustration, not a promise.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF: real money examples + buy & hold -->
+  <section class="wrap" id="proof">
+    <div class="kicker">Real money, real history</div>
+    <h2 class="sec display">$500, ten years ago.</h2>
+    <p class="sec-lead">Not a fantasy — actual market history. Here's what $500 invested back in May 2016 would be worth today. Past performance never guarantees the future, and the big winners are obvious only in hindsight.</p>
+    <div class="proof-grid">
+      <div class="proof-card spy">
+        <div class="p-label">$500 in an S&amp;P 500 index fund (SPY)</div>
+        <div class="p-num">≈ $2,100</div>
+        <div class="p-sub">About <b>4×</b> — by owning all 500 top U.S. companies at once. Dividends reinvested. The steady, boring, winning move.</div>
+      </div>
+      <div class="proof-card aapl">
+        <div class="p-label">$500 in Apple (AAPL)</div>
+        <div class="p-num">≈ $6,600</div>
+        <div class="p-sub">About <b>13×</b> — Apple went from ~$23 to ~$302 a share. Amazing… but betting on one stock is a gamble.</div>
+      </div>
+      <div class="proof-card nvda">
+        <div class="p-label">$500 in NVIDIA (NVDA)</div>
+        <div class="p-num">≈ $100,000</div>
+        <div class="p-sub">About <b>200×</b> — the AI rocket, ~$1 to ~$223 a share (split-adjusted). Insane… but nobody knew that in 2016, and most "sure things" flop.</div>
+      </div>
+    </div>
+    <div class="holdbox">
+      <div class="hold-h">📈 The #1 rule: buy, hold, and DON'T panic-sell.</div>
+      <p>Here's the exciting part — <b>history is on your side.</b> The market bounces <b>up and down</b> day to day; that's completely normal. But over the long run it has <b>always trended up.</b> The catch most people miss: <b>a drop isn't a loss until you sell.</b> When the value dips, you do <b>nothing</b> — you hold, you keep buying, and you let it recover and grow. The winners aren't the fastest traders; they're the most patient owners, which is why we do <span class="no">NOT</span> recommend day trading. Buy a low-cost index fund, stay in the market through the ups and downs, and let time turn small moves into real wealth. And here's the magic of the index: <b>you can't reliably pick the next Apple or NVIDIA — but buy the whole S&amp;P 500 and you automatically own every future winner.</b> <b>This is for your future — time <i>in</i> the market beats timing the market.</b></p>
+    </div>
+  </section>
+
+  <!-- THE 6 MOVES -->
+  <section class="wrap" id="moves">
+    <div class="kicker">Do these, in order</div>
+    <h2 class="sec display">The 6 money moves</h2>
+    <p class="sec-lead">You don't need to do everything at once. Knock these out roughly top-to-bottom and you're ahead of most people twice your age.</p>
+    <div class="moves">
+
+      <div class="move m1">
+        <div class="num">01</div>
+        <span class="tag">Safety first</span>
+        <h3>Build a starter emergency fund</h3>
+        <p>Stash <b>$1,000 fast</b>, then build toward <b>3–6 months of expenses</b> in a separate savings account. This is your "life happened" buffer so a flat tire or surprise bill never becomes credit-card debt. <b>Automate it</b> — even $25/paycheck.</p>
+      </div>
+
+      <div class="move m2">
+        <div class="num">02</div>
+        <span class="tag">Clean up</span>
+        <h3>Kill bad debt &amp; build your credit</h3>
+        <p>Attack <b>high-interest debt</b> (credit cards, 20%+) like it's on fire. Then build credit: pay <b>on time, every time</b>, and keep balances under ~30% of your limit. A strong score = cheaper cars, homes, and rates for life.</p>
+      </div>
+
+      <div class="move m3">
+        <div class="num">03</div>
+        <span class="tag">Stop the leaks</span>
+        <h3>Bank smarter — go credit union</h3>
+        <p>Credit unions like <b>RBFCU</b> are <b>member-owned, not-for-profit</b>, so profits come back to you as <b>lower fees, fewer surprise charges, and better rates</b> than big banks. Same FDIC-style protection (NCUA-insured). Easy switch, real savings.</p>
+      </div>
+
+      <div class="move m4">
+        <div class="num">04</div>
+        <span class="tag">Own the market</span>
+        <h3>Buy the index &amp; hold</h3>
+        <p>No 401(k) match at work? Your next-best move is to invest yourself. <b>Buy a low-cost S&amp;P 500 index fund</b> (like SPY) and you own a slice of America's 500 biggest companies — historically about <b>10%/yr</b> over the long run. Turn on <b>automatic monthly investing</b> and hold for years. No day-trading.</p>
+      </div>
+
+      <div class="move m5">
+        <div class="num">05</div>
+        <span class="tag">Tax-free growth</span>
+        <h3>Do it inside a Roth IRA</h3>
+        <p>Hold those index funds in a <b>Roth IRA</b> to supercharge them: invest up to <b>$7,500 in 2026</b>, pay tax now, then it grows and comes out <b>100% tax-free in retirement</b>. Open one at E*TRADE or Robinhood in minutes — perfect for younger earners.</p>
+      </div>
+
+      <div class="move m6">
+        <div class="num">06</div>
+        <span class="tag">Protect your people</span>
+        <h3>Cover your family for ~$1/day</h3>
+        <p>If anyone depends on you, get <b>term life insurance</b> — when you're young and healthy it's shockingly cheap. A <b>$500K–$1M</b> 20-year policy can run as little as <b>~$1 a day</b>, paid to <b>any beneficiary you choose</b> (partner, kids, parents). We like <b>Ethos</b> for a fast, no-exam online quote. Then name beneficiaries on every account and set up a <b>basic will</b>. Love is a logistics plan. ❤️</p>
+      </div>
+
+    </div>
+
+    <div class="babybox">
+      <div class="baby-h">👶 New baby in 2025? Go claim the free $1,000.</div>
+      <p>Through the new federal <b>"Trump Accounts"</b> program, every U.S.-citizen child <b>born Jan 1, 2025 – Dec 31, 2028</b> (with a Social Security number) can receive a <b>one-time $1,000 from the government</b>, deposited into a tax-advantaged account that's <b>automatically invested in a low-cost U.S. stock index fund</b>. Family and employers can add up to <b>$5,000/year</b>, and it grows in your child's name until they turn 18. Translation: a <b>free head start on generational wealth</b> — left alone, that $1,000 could compound into many thousands by adulthood. Don't leave free money on the table.</p>
+      <a class="baby-cta" href="https://trumpaccounts.gov" target="_blank" rel="noopener">Claim it at trumpaccounts.gov →</a>
+      <div class="baby-note">Open one with IRS Form 4547 on your 2025 tax return, or online at trumpaccounts.gov. Accounts are live in 2026; added contributions begin after July 4, 2026.</div>
+    </div>
+  </section>
+
+  <!-- TRAPS TO DODGE -->
+  <section class="wrap" id="traps">
+    <div class="kicker" style="color:var(--coral)">Protect your money</div>
+    <h2 class="sec display">Traps to dodge 🚩</h2>
+    <p class="sec-lead">The fastest way to win is to <b>not lose</b>. These are the sales pitches and shortcuts that quietly drain everyday earners. Spot them, skip them.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">
+      <div style="background:var(--card);border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:16px;padding:18px">
+        <div style="font-family:'Archivo Black';font-size:17px;margin-bottom:6px">🚩 Get-rich-quick & “guaranteed” returns</div>
+        <p style="color:var(--muted);font-size:14px">If it promises <b>guaranteed, no-risk, sky-high</b> returns — crypto schemes, day-trading “systems,” hot tips — it’s a trap. <b style="color:var(--text)">Real wealth is boring:</b> buy low-cost index funds and hold for decades.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:16px;padding:18px">
+        <div style="font-family:'Archivo Black';font-size:17px;margin-bottom:6px">🚩 Whole life as an “investment”</div>
+        <p style="color:var(--muted);font-size:14px"><b style="color:var(--text)">Insurance is protection, not an investment.</b> For most young, healthy people, skip whole life and its high premiums — buy cheap <b>term life</b> and invest the difference yourself.</p>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:16px;padding:18px">
+        <div style="font-family:'Archivo Black';font-size:17px;margin-bottom:6px">🚩 Commission-driven advisors</div>
+        <p style="color:var(--muted);font-size:14px">Salespeople paid by commission may push <b>high-fee products that pay them, not you</b>. Ask “<b style="color:var(--text)">how do you get paid?</b>” and prefer <b>fee-only fiduciaries</b>. A 1%+ yearly fee can quietly cost you six figures over a lifetime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLKIT -->
+  <section class="wrap" id="toolkit">
+    <div class="kicker">Tap to open · Money Move$ recommended toolkit</div>
+    <h2 class="sec display">The toolkit 🧰</h2>
+    <p class="sec-lead">These are the apps we recommend getting started with. Click any card to open it. Educational starting points — not “you must use these.”</p>
+    <p class="tool-disc no-print">Transparency: some links may become affiliate links later. If we ever earn a referral fee, it <b>won’t change</b> the advice on this page. Always compare fees yourself.</p>
+    <div class="tools">
+
+      <a class="tool" href="https://claude.ai" target="_blank" rel="noopener" data-track="toolkit" data-tool="claude">
+        <div class="ic" style="background:linear-gradient(135deg,#ff9d6c,#ff5e5b)">AI</div>
+        <h4>Claude <span class="free">FREE</span></h4>
+        <div class="role">Your AI money sidekick · National</div>
+        <p>Download the app and ask it anything — build a budget, explain a 401(k), compare loan offers, or make a debt-payoff plan. Like a smart friend who's read every finance book.</p>
+        <span class="go">Get Claude →</span>
+        <span class="url">claude.ai</span>
+      </a>
+
+      <a class="tool" href="https://www.cfosilvia.com" target="_blank" rel="noopener" data-track="toolkit" data-tool="silvia">
+        <div class="ic" style="background:linear-gradient(135deg,#b18cff,#3dd4ff)">$</div>
+        <h4>CFO Silvia <span class="free">FREE</span></h4>
+        <div class="role">Your personal AI CFO · National</div>
+        <p>Connect your accounts and Silvia tracks your net worth, analyzes your portfolio, and answers money questions 24/7. It can see your accounts but <b>can't move your money</b>.</p>
+        <span class="go">Meet Silvia →</span>
+        <span class="url">cfosilvia.com</span>
+      </a>
+
+      <a class="tool" href="https://www.monarchmoney.com" target="_blank" rel="noopener" data-track="toolkit" data-tool="monarch">
+        <div class="ic" style="background:linear-gradient(135deg,#6affc0,#3dd4ff)">M</div>
+        <h4>Monarch <span class="paid">PAID</span></h4>
+        <div class="role">All your money, one screen · National</div>
+        <p>The polished budgeting + net-worth app — track spending, set goals, great for couples. Heads up: it's a <b>paid subscription</b> (~$100/yr) after a 7-day free trial. Prefer free? Try Rocket Money →</p>
+        <span class="go">Try it →</span>
+        <span class="url">monarchmoney.com</span>
+      </a>
+
+      <a class="tool" href="https://www.rocketmoney.com" target="_blank" rel="noopener" data-track="toolkit" data-tool="rocketmoney">
+        <div class="ic" style="background:linear-gradient(135deg,#3dd4ff,#6affc0)">RM</div>
+        <h4>Rocket Money <span class="free">FREE</span></h4>
+        <div class="role">Free budgeting + tracking · National</div>
+        <p>A genuinely <b>free</b> alternative to Monarch — link your accounts to track spending, budgets, and sneaky subscriptions at no cost. Perfect if you don't want a monthly bill.</p>
+        <span class="go">Track it free →</span>
+        <span class="url">rocketmoney.com</span>
+      </a>
+
+      <a class="tool" href="https://www.rbfcu.org" target="_blank" rel="noopener" data-track="toolkit" data-tool="rbfcu">
+        <div class="ic" style="background:linear-gradient(135deg,#c6ff3d,#a6e417)">RB</div>
+        <h4>RBFCU <span class="local">LOCAL</span></h4>
+        <div class="role">Bank with low fees · San Antonio area</div>
+        <p>A member-owned credit union — checking, savings, auto loans, and mortgages with fewer fees and member-friendly rates. Where your emergency fund can live. Not local? See Alliant / PenFed on the business page.</p>
+        <span class="go">Become a member →</span>
+        <span class="url">rbfcu.org</span>
+      </a>
+
+      <a class="tool" href="https://us.etrade.com" target="_blank" rel="noopener" data-track="toolkit" data-tool="etrade">
+        <div class="ic" style="background:linear-gradient(135deg,#ffd23f,#ff9d6c)">E</div>
+        <h4>E*TRADE</h4>
+        <div class="role">Invest &amp; retirement accounts · National</div>
+        <p>A full-featured broker (from Morgan Stanley). Open a <b>Roth IRA</b> or brokerage account, buy index funds, and set up automatic investing. Loads of beginner guides.</p>
+        <span class="go">Open an account →</span>
+        <span class="url">us.etrade.com</span>
+      </a>
+
+      <a class="tool" href="https://robinhood.com" target="_blank" rel="noopener" data-track="toolkit" data-tool="robinhood">
+        <div class="ic" style="background:linear-gradient(135deg,#6affc0,#c6ff3d)">RH</div>
+        <h4>Robinhood</h4>
+        <div class="role">Investing made simple · National</div>
+        <p>A clean, beginner-friendly app for investing and Roth IRAs (some offer a contribution match). Easy to start small. Invest for the long term — skip the day-trading hype.</p>
+        <span class="go">Start investing →</span>
+        <span class="url">robinhood.com</span>
+      </a>
+
+      <a class="tool" href="https://www.ethos.com" target="_blank" rel="noopener" data-track="toolkit" data-tool="ethos">
+        <div class="ic" style="background:linear-gradient(135deg,#ff5e5b,#b18cff)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0d0f14" aria-hidden="true"><path d="M12 21s-7-4.6-9.3-9C1 8.4 2.7 5.5 6 5.5c2 0 3.2 1.2 4 2.3.8-1.1 2-2.3 4-2.3 3.3 0 5 2.9 3.3 6.5C19 16.4 12 21 12 21z"/></svg></div>
+        <h4>Ethos</h4>
+        <div class="role">Term life in minutes · National</div>
+        <p>Protect your family fast — get a <b>$500K–$1M</b> term life quote online with no medical exam for most healthy young adults. Often around <b>$1 a day</b>. Name any beneficiary you choose.</p>
+        <span class="go">Get a quote →</span>
+        <span class="url">ethos.com</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ASK CLAUDE -->
+  <section class="wrap" id="ask">
+    <div class="kicker">Steal these</div>
+    <h2 class="sec display">Don't know where to start? Ask Claude.</h2>
+    <p class="sec-lead">Download Claude, paste one of these in, and tweak the numbers to your life. It'll walk you through it step by step.</p>
+    <div class="claude-box">
+      <div class="prompts">
+        <div class="prompt">Build me a simple monthly budget. I make <span>$[take-home]</span> and my rent is <span>$[amount]</span>. Use the 50/30/20 rule and keep it realistic.</div>
+        <div class="prompt">I have <span>$[balance]</span> in credit card debt at <span>[%]</span> interest. Make me a payoff plan and tell me how much to pay each month to be done in a year.</div>
+        <div class="prompt">Explain a Roth IRA vs a 401(k) like I'm 25 and brand new to investing. Which should I prioritize?</div>
+        <div class="prompt">I want a 3-month emergency fund. My monthly expenses are <span>$[amount]</span>. How much do I need, and how do I save it in 12 months?</div>
+        <div class="prompt">I'm <span>[age]</span> with <span>[# kids/dependents]</span>. How much term life insurance do I actually need, and what should I look out for?</div>
+        <div class="prompt">Compare two car loan offers for me: <span>[offer A]</span> vs <span>[offer B]</span>. Which is cheaper overall and why?</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAY THE GAME (web only) -->
+  <section class="wrap no-print" id="play">
+    <div style="background:linear-gradient(135deg,rgba(198,255,61,.16),rgba(61,212,255,.12));border:1px solid var(--line);border-radius:var(--radius);padding:30px;display:flex;flex-wrap:wrap;align-items:center;gap:24px;justify-content:space-between;box-shadow:var(--shadow)">
+      <div style="flex:1;min-width:260px">
+        <div class="kicker">Now make it fun 🎮</div>
+        <h2 class="sec display" style="margin-bottom:8px">Play <span style="color:var(--lime)">Money Move$: The Climb</span></h2>
+        <p style="color:var(--muted);max-width:540px;font-size:16px">Reading is step one. <b style="color:var(--text)">Doing it</b> is where the magic happens. The Climb turns every move on this page into bite-size levels, combos, ranks and badges — and the <b style="color:var(--text)">biggest rewards go to actually opening that Roth, saving your first $25, and buying that index fund.</b> Quick dopamine hits while you build real wealth.</p>
+        <p style="color:var(--muted);max-width:540px;font-size:15px;margin-top:10px">Want to <b style="color:#ff9f43">build your own thing</b> instead of just saving a paycheck? There's a whole world for that too — <b style="color:var(--text)">The Hustle</b> teaches you to start a real business at your age.</p>
+        <div class="cta-row">
+          <a class='btn btn-lime' href='/game'>🚀 Start climbing — it's free</a>
+          <a class='btn btn-ghost' href='/business' style='border-color:#ff9f43;color:#ff9f43'>🏪 Build a business</a>
+        </div>
+      </div>
+      <div style="flex:0 0 auto">
+        <svg width="120" height="120" viewBox="0 0 96 96" aria-hidden="true">
+          <rect x="6" y="56" width="14" height="28" rx="5" fill="#37e6a4"/>
+          <rect x="24" y="42" width="14" height="42" rx="5" fill="#5ef0bf"/>
+          <rect x="42" y="26" width="14" height="58" rx="5" fill="#c6ff3d"/>
+          <g transform="translate(58,16) rotate(28) translate(-14,-8) scale(0.95)">
+            <path d="M14 52 L8 52 L11 68 Z" fill="#ffae3d"/>
+            <path d="M13 52 L9 52 L11 62 Z" fill="#ffd23f"/>
+            <path d="M4 40 L-4 56 L10 48 Z" fill="#ff5a4d"/>
+            <path d="M18 40 L26 56 L12 48 Z" fill="#ff5a4d"/>
+            <rect x="5" y="14" width="12" height="38" rx="6" fill="#eef1f6"/>
+            <path d="M11 2 C16 8 17 12 17 16 L5 16 C5 12 6 8 11 2 Z" fill="#ff5a4d"/>
+            <circle cx="11" cy="28" r="4" fill="#3dd4ff"/>
+          </g>
+          <circle cx="52" cy="12" r="2.2" fill="#3dd4ff"/>
+          <circle cx="58" cy="20" r="1.5" fill="#3dd4ff" opacity="0.7"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7-DAY CHALLENGE -->
+  <section class="wrap" id="challenge">
+    <div class="kicker">Action &gt; intentions</div>
+    <h2 class="sec display">The 7-day money challenge 🔥</h2>
+    <p class="sec-lead">One small move a day. Tap each as you finish it. By next week you'll have done more than 90% of people ever do. Let's go.</p>
+    <div class="challenge">
+      <div class="days" id="days"></div>
+      <div class="progress-wrap">
+        <div class="bar"><div id="barFill"></div></div>
+        <div class="progress-label"><span id="progText">0 of 7 done</span><span id="cheer">Pick day 1 to start →</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Money Move<span>$</span></div>
+        <div class="foot-links no-print">
+          <a href="/game">Play</a>
+          <a href="/parents">Parents</a>
+          <a href="/business">Hustle</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/terms">Terms</a>
+        </div>
+      </div>
+      <p class="disclaimer">
+        Money Move$ is an independent financial education resource. The apps and companies listed are recommended starting points, not paid endorsements, and Money Move$ may not be affiliated with them. Some links may become affiliate links in the future — we'll label them. This is <b>not</b> personalized financial, tax, legal, or investment advice. Investing involves risk, including possible loss of principal, and projections shown are illustrations, not guarantees. Contribution limits are for 2026 and may change. Please consider your own situation and consult a licensed professional before making major financial decisions.
+      </p>
+    </div>
+  </footer>
+
+<div id="fyPill" class="no-print" title="Tap to tweak the numbers">
+  <span class="fyp-k">🔮 Future You</span>
+  <span class="fyp-amt" id="fypAmt">$1.26M</span>
+  <span class="fyp-day" id="fypDay">earning $346/day — even while you sleep</span>
+</div>
+
+<script>
+  /* ===== rotating "thinking" ticker ===== */
+  const words = ["compounding","stacking gains","building the buffer","future-proofing","securing the bag",
+                 "leveling up","getting ahead","earning interest","playing the long game","quietly winning"];
+  let wi = 0;
+  const tw = document.getElementById('ticker-word');
+  setInterval(()=>{
+    wi = (wi+1) % words.length;
+    tw.style.opacity = 0;
+    setTimeout(()=>{ tw.textContent = words[wi]; tw.style.opacity = 1; }, 180);
+  }, 1900);
+  tw.style.transition = "opacity .18s ease";
+
+  /* ===== compound calculator (age + amount + return) ===== */
+  const amt = document.getElementById('amt');
+  const age = document.getElementById('age');
+  const rate = document.getElementById('rate');
+  const amtVal = document.getElementById('amtVal');
+  const ageVal = document.getElementById('ageVal');
+  const rateVal = document.getElementById('rateVal');
+  const lump = document.getElementById('lump');
+  const lumpVal = document.getElementById('lumpVal');
+  const fvOut = document.getElementById('fvOut');
+  const fvCap = document.getElementById('fvCap');
+  const startNum = document.getElementById('startNum');
+  const lateNum = document.getElementById('lateNum');
+  const startCap = document.getElementById('startCap');
+  const lateCap = document.getElementById('lateCap');
+
+  function fv(monthly, years, annualRate){
+    if(years<=0) return 0;
+    const r = annualRate/12, n = years*12;
+    return monthly * ((Math.pow(1+r,n)-1)/r);
+  }
+  function fvLump(principal, years, annualRate){
+    if(years<=0) return principal;
+    return principal * Math.pow(1+annualRate/12, years*12);
+  }
+  function money(n){ return "$" + Math.round(n).toLocaleString("en-US"); }
+  function compact(n){
+    if(n>=1e12) return "$" + (n/1e12).toFixed(2).replace(/\.?0+$/,'') + "T";
+    if(n>=1e9)  return "$" + (n/1e9).toFixed(2).replace(/\.?0+$/,'') + "B";
+    if(n>=1e6)  return "$" + (n/1e6).toFixed(2).replace(/\.?0+$/,'') + "M";
+    if(n>=1000) return "$" + Math.round(n/1000) + "k";
+    return "$" + Math.round(n);
+  }
+  function big(n){ return n < 1e7 ? money(n) : compact(n); }
+  function update(){
+    const m = +amt.value, a = +age.value, rt = (+rate.value)/100, L = +lump.value;
+    amtVal.textContent = money(m);
+    lumpVal.textContent = money(L);
+    ageVal.textContent = a;
+    rateVal.textContent = (+rate.value);
+    const yrs = 65 - a, lateYrs = Math.max(0, yrs - 10);
+    const start = fvLump(L, yrs, rt) + fv(m, yrs, rt);
+    const late  = fvLump(L, lateYrs, rt) + fv(m, lateYrs, rt);
+    const contrib = L + m * 12 * yrs;
+    fvOut.textContent = big(start);
+    const lumpTxt = L > 0 ? ("start with <b style='color:var(--text)'>"+money(L)+"</b> and ") : "";
+    fvCap.innerHTML = "…if you "+lumpTxt+"invest <b style='color:var(--text)'>"+money(m)+"/mo</b> from age <b style='color:var(--text)'>"+a+"</b> to 65 at a "+(+rate.value)+"% average return. You'd put in <b style='color:var(--text)'>"+money(contrib)+"</b> of your own money.";
+    startNum.textContent = compact(start);
+    lateNum.textContent = compact(late);
+    startCap.textContent = "Start at " + a;
+    lateCap.textContent = lateYrs>0 ? ("Wait 10 yrs (start "+(a+10)+")") : "Waited too long";
+    /* Future You pill — live sync with the calculator */
+    const fypAmt=document.getElementById('fypAmt'),fypDay=document.getElementById('fypDay'),fyPill=document.getElementById('fyPill');
+    if(fypAmt){
+      fypAmt.textContent = compact(start) + " by 65";
+      fypDay.textContent = "earning " + money(start*rt/365) + "/day — even while you sleep";
+      fyPill.classList.remove('pop');void fyPill.offsetWidth;fyPill.classList.add('pop');
+    }
+  }
+  document.getElementById('fyPill').addEventListener('click',()=>document.getElementById('why').scrollIntoView({behavior:'smooth'}));
+  [amt,lump,age,rate].forEach(el=>el.addEventListener('input', update));
+  update();
+
+  /* ===== waitlist + share + parent mode + tracking ===== */
+  (function(){
+    const params=new URLSearchParams(location.search);
+    // /?for=parents → dedicated parent page (shareable short link)
+    if(params.get('for')==='parents'||params.get('audience')==='parents'){
+      location.replace('/parents'+(location.hash||''));
+      return;
+    }
+    if(params.get('view')==='parents'){
+      document.body.classList.add('parent-mode');
+      const strip=document.getElementById('parentStrip');
+      if(strip)setTimeout(function(){strip.scrollIntoView({behavior:'smooth',block:'center'});},300);
+      if(window.MM&&MM.track)MM.track('parent_mode_landing',{});
+    }
+
+    // Track CTAs
+    document.querySelectorAll('[data-track]').forEach(function(el){
+      el.addEventListener('click',function(){
+        if(window.MM&&MM.track)MM.track(el.getAttribute('data-track'),{tool:el.getAttribute('data-tool')||''});
+      });
+    });
+
+    // Share site (teen-friendly caption)
+    const shareBtn=document.getElementById('shareSite');
+    if(shareBtn)shareBtn.addEventListener('click',function(){
+      const url=location.origin+'/';
+      const text='Money Move$ is a free game that teaches real money skills 🚀 First win in ~2 min. No lectures. '+url+' #MoneyMoves';
+      if(window.MM&&MM.track)MM.track('share_site',{});
+      if(navigator.share){
+        navigator.share({title:'Money Move$',text:text,url:url}).catch(function(){});
+      }else if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(function(){shareBtn.textContent='✓ Copied — paste it!';setTimeout(function(){shareBtn.textContent='📣 Share with a friend';},2000);});
+      }else{
+        prompt('Copy this:',text);
+      }
+    });
+
+    const form=document.getElementById('waitlist');
+    const note=document.getElementById('wlNote');
+    const input=document.getElementById('wlEmail');
+    if(!form||!input)return;
+    try{
+      const prev=JSON.parse(localStorage.getItem('mm_waitlist')||'null');
+      if(prev&&prev.email){
+        form.classList.add('done');
+        form.querySelector('.wl-label').textContent="You're on the list 🚀";
+        form.querySelector('.wl-row').style.display='none';
+        note.textContent='We saved '+prev.email+'. Check your inbox when we drop the 7-day plan + game updates.';
+        return;
+      }
+    }catch(e){}
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      const email=(input.value||'').trim().toLowerCase();
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){note.textContent='Enter a real email so we can reach you.';note.style.color='var(--coral)';return;}
+      const entry={email:email,ts:Date.now(),source:'landing',audience:'teen-first',ua:(navigator.userAgent||'').slice(0,80)};
+      try{
+        const list=JSON.parse(localStorage.getItem('mm_waitlist_all')||'[]');
+        if(!list.some(function(x){return x.email===email;}))list.push(entry);
+        localStorage.setItem('mm_waitlist_all',JSON.stringify(list));
+        localStorage.setItem('mm_waitlist',JSON.stringify(entry));
+      }catch(err){}
+      if(window.MM&&MM.track)MM.track('waitlist_join',{domain:email.split('@')[1]||''});
+      // Optional remote endpoint: set window.MM_WAITLIST_ENDPOINT = 'https://formspree.io/f/xxxxx'
+      try{
+        if(window.MM_WAITLIST_ENDPOINT){
+          fetch(window.MM_WAITLIST_ENDPOINT,{
+            method:'POST',
+            headers:{'Content-Type':'application/json','Accept':'application/json'},
+            body:JSON.stringify({email:email,source:'money-moves-landing'}),
+            mode:'cors',keepalive:true
+          }).catch(function(){});
+        }
+      }catch(err){}
+      form.classList.add('done');
+      form.querySelector('.wl-label').textContent="You're in 🔥";
+      form.querySelector('.wl-row').style.display='none';
+      note.style.color='';
+      note.innerHTML='Saved. Jump into the game while you wait — <a href="/game" style="color:var(--lime);font-weight:700">first win in ~2 min →</a>';
+      const ch=document.getElementById('challenge');
+      if(ch)setTimeout(function(){ch.scrollIntoView({behavior:'smooth',block:'start'});},400);
+    });
+  })();
+
+  /* ===== 7-day challenge ===== */
+  const tasks = [
+    "Open the Claude app and ask it to build you a budget.",
+    "Move $25 (or more) into a separate savings account.",
+    "Check your credit score — most banks show it free.",
+    "Open BOTH a brokerage account and a Roth IRA — you need both.",
+    "Pick a low-cost S&P 500 index fund (like SPY) to buy & hold.",
+    "Download a free money tracker (CFO Silvia or Rocket Money) and link one account.",
+    "Name your beneficiaries + get a term-life quote at Ethos."
+  ];
+  const daysEl = document.getElementById('days');
+  const state = new Array(7).fill(false);
+  const cheers = ["Nice start! 👀","Two down — momentum! 💪","You're on a roll 🔥","Halfway there! 🚀","Crushing it 💚","Almost legend status ⭐","DONE. You're officially ahead of the game. 🏆"];
+
+  tasks.forEach((t,i)=>{
+    const d = document.createElement('div');
+    d.className = 'day';
+    d.innerHTML = '<div class="box"></div><div><div class="d-num">Day '+(i+1)+'</div><div class="d-txt">'+t+'</div></div>';
+    d.addEventListener('click', ()=>{
+      state[i] = !state[i];
+      d.classList.toggle('done', state[i]);
+      d.querySelector('.box').textContent = state[i] ? '✓' : '';
+      render();
+    });
+    daysEl.appendChild(d);
+  });
+  function render(){
+    const done = state.filter(Boolean).length;
+    document.getElementById('barFill').style.width = (done/7*100)+'%';
+    document.getElementById('progText').textContent = done+' of 7 done';
+    document.getElementById('cheer').textContent = done===0 ? 'Pick day 1 to start →' : cheers[done-1];
+  }
+</script>
+</body>
+</html>
