@@ -10,14 +10,19 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Money Move$">
+<link rel="canonical" href="https://playmoneymoves.com/">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://playmoneymoves.com/">
+<meta property="og:site_name" content="Money Move$">
 <meta property="og:title" content="Money Move$ — Small moves. Big future.">
 <meta property="og:description" content="Duolingo for money. Free game that turns real money skills into a climb you actually want to keep playing.">
-<meta property="og:image" content="/icons/icon-512.png">
+<meta property="og:image" content="https://playmoneymoves.com/icons/icon-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Money Move$ — Small moves. Big future.">
 <meta name="twitter:description" content="Free financial literacy game. Level up your money skills — start free.">
-<meta name="twitter:image" content="/icons/icon-512.png">
+<meta name="twitter:image" content="https://playmoneymoves.com/icons/icon-512.png">
 <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('/sw.js').catch(function(){});});}</script>
@@ -511,14 +516,16 @@
       </div>
       <a class="ps-cta" href="/game" data-track="cta_play_parent">Let them play →</a>
     </div>
-    <!-- Email waitlist -->
-    <form class="waitlist no-print" id="waitlist" autocomplete="email">
+    <!-- Email waitlist — Netlify Forms (server-side) + local backup -->
+    <form class="waitlist no-print" id="waitlist" name="waitlist" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" autocomplete="email">
+      <input type="hidden" name="form-name" value="waitlist">
+      <p style="display:none" aria-hidden="true"><label>Don’t fill this out: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
       <label class="wl-label" for="wlEmail">Get the free 7-day money plan + early drops</label>
       <div class="wl-row">
         <input id="wlEmail" name="email" type="email" required placeholder="you@email.com" inputmode="email" enterkeyhint="done">
-        <button type="submit" class="btn btn-lime wl-btn">Send it 🔥</button>
+        <button type="submit" class="btn btn-lime wl-btn" id="wlSubmit">Send it 🔥</button>
       </div>
-      <p class="wl-note" id="wlNote">No spam. Unsubscribe anytime. Built for teens &amp; the adults who love them.</p>
+      <p class="wl-note" id="wlNote">No spam. Unsubscribe anytime — email <a href="mailto:hello@playmoneymoves.com" style="color:var(--cyan)">hello@playmoneymoves.com</a>. Built for teens &amp; the adults who love them.</p>
     </form>
   </header>
 
@@ -829,6 +836,9 @@
     <div class="foot-grid">
       <div>
         <div class="foot-brand">Money Move<span>$</span></div>
+        <p style="color:var(--muted);font-size:13.5px;margin:8px 0 12px;max-width:360px;line-height:1.5">
+          Independent free financial education — built for teens, parents, and anyone catching up. Not a bank, broker, or advisor.
+        </p>
         <div class="foot-links no-print">
           <a href="/game">Play</a>
           <a href="/parents">Parents</a>
@@ -836,10 +846,14 @@
           <a href="/business">Hustle</a>
           <a href="/privacy">Privacy</a>
           <a href="/terms">Terms</a>
+          <a href="mailto:hello@playmoneymoves.com">Contact</a>
         </div>
+        <p style="margin-top:12px;font-size:13px;color:var(--muted)">
+          Questions? <a href="mailto:hello@playmoneymoves.com" style="color:var(--cyan);font-weight:700">hello@playmoneymoves.com</a>
+        </p>
       </div>
       <p class="disclaimer">
-        Money Move$ is an independent financial education resource. The apps and companies listed are recommended starting points, not paid endorsements, and Money Move$ may not be affiliated with them. Some links may become affiliate links in the future — we'll label them. This is <b>not</b> personalized financial, tax, legal, or investment advice. Investing involves risk, including possible loss of principal, and projections shown are illustrations, not guarantees. Contribution limits are for 2026 and may change. Please consider your own situation and consult a licensed professional before making major financial decisions.
+        Money Move$ is an independent financial education resource. The apps and companies listed are recommended starting points, not paid endorsements, and Money Move$ may not be affiliated with them. Some links may become affiliate links in the future — we'll label them. This is <b>not</b> personalized financial, tax, legal, or investment advice. Investing involves risk, including possible loss of principal, and projections shown are illustrations, not guarantees. Contribution limits are for 2026 and may change. Please consider your own situation and consult a licensed professional before making major financial decisions. Contact: <a href="mailto:hello@playmoneymoves.com" style="color:var(--cyan)">hello@playmoneymoves.com</a>
       </p>
     </div>
   </footer>
@@ -966,22 +980,25 @@
     const form=document.getElementById('waitlist');
     const note=document.getElementById('wlNote');
     const input=document.getElementById('wlEmail');
+    const submitBtn=document.getElementById('wlSubmit');
     if(!form||!input)return;
+    function markDone(email){
+      form.classList.add('done');
+      form.querySelector('.wl-label').textContent="You're on the list 🚀";
+      form.querySelector('.wl-row').style.display='none';
+      note.style.color='';
+      note.innerHTML='Thanks'+(email?' — we saved <b style="color:var(--text)">'+email+'</b>':'')+'. Watch your inbox for the 7-day plan + drops. Meanwhile: <a href="/game" style="color:var(--lime);font-weight:700">first win in ~2 min →</a>';
+    }
     try{
       const prev=JSON.parse(localStorage.getItem('mm_waitlist')||'null');
-      if(prev&&prev.email){
-        form.classList.add('done');
-        form.querySelector('.wl-label').textContent="You're on the list 🚀";
-        form.querySelector('.wl-row').style.display='none';
-        note.textContent='We saved '+prev.email+'. Check your inbox when we drop the 7-day plan + game updates.';
-        return;
-      }
+      if(prev&&prev.email){markDone(prev.email);return;}
     }catch(e){}
     form.addEventListener('submit',function(e){
       e.preventDefault();
       const email=(input.value||'').trim().toLowerCase();
       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){note.textContent='Enter a real email so we can reach you.';note.style.color='var(--coral)';return;}
-      const entry={email:email,ts:Date.now(),source:'landing',audience:'teen-first',ua:(navigator.userAgent||'').slice(0,80)};
+      if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='Sending…';}
+      const entry={email:email,ts:Date.now(),source:'landing',audience:'teen-first'};
       try{
         const list=JSON.parse(localStorage.getItem('mm_waitlist_all')||'[]');
         if(!list.some(function(x){return x.email===email;}))list.push(entry);
@@ -989,24 +1006,26 @@
         localStorage.setItem('mm_waitlist',JSON.stringify(entry));
       }catch(err){}
       if(window.MM&&MM.track)MM.track('waitlist_join',{domain:email.split('@')[1]||''});
-      // Optional remote endpoint: set window.MM_WAITLIST_ENDPOINT = 'https://formspree.io/f/xxxxx'
-      try{
-        if(window.MM_WAITLIST_ENDPOINT){
-          fetch(window.MM_WAITLIST_ENDPOINT,{
-            method:'POST',
-            headers:{'Content-Type':'application/json','Accept':'application/json'},
-            body:JSON.stringify({email:email,source:'money-moves-landing'}),
-            mode:'cors',keepalive:true
-          }).catch(function(){});
-        }
-      }catch(err){}
-      form.classList.add('done');
-      form.querySelector('.wl-label').textContent="You're in 🔥";
-      form.querySelector('.wl-row').style.display='none';
-      note.style.color='';
-      note.innerHTML='Saved. Jump into the game while you wait — <a href="/game" style="color:var(--lime);font-weight:700">first win in ~2 min →</a>';
-      const ch=document.getElementById('challenge');
-      if(ch)setTimeout(function(){ch.scrollIntoView({behavior:'smooth',block:'start'});},400);
+
+      // Netlify Forms — real server-side capture (view in Netlify → Forms)
+      const body=new URLSearchParams();
+      body.set('form-name','waitlist');
+      body.set('email',email);
+      body.set('source','landing');
+      fetch('/',{
+        method:'POST',
+        headers:{'Content-Type':'application/x-www-form-urlencoded'},
+        body:body.toString()
+      }).then(function(res){
+        if(!res.ok)throw new Error('form '+res.status);
+        markDone(email);
+        const ch=document.getElementById('challenge');
+        if(ch)setTimeout(function(){ch.scrollIntoView({behavior:'smooth',block:'start'});},400);
+      }).catch(function(){
+        // Still mark joined locally if network hiccup; Netlify may have received it
+        markDone(email);
+        note.innerHTML='You\'re on our list on this device. If you don\'t get email later, write us at <a href="mailto:hello@playmoneymoves.com" style="color:var(--cyan)">hello@playmoneymoves.com</a>. <a href="/game" style="color:var(--lime);font-weight:700">Play free →</a>';
+      });
     });
   })();
 
